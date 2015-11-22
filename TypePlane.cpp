@@ -30,4 +30,10 @@ namespace Airport {
     std::string TypePlane::getTypeOfPlane() {
         return typeOfPlane;
     }
+
+    void TypePlane::calcSeats(int *firstClass, int *econPlus, int *econ, int total) {
+        *firstClass = total * .1;
+        *econPlus = total * .2;
+        *econ = total - *firstClass - *econPlus;
+    }
 }

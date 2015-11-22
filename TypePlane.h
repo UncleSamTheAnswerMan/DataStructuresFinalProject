@@ -12,6 +12,7 @@ namespace Airport {
         TypePlane(std::string planeType);
         int getNumOfSeats();
         std::string getTypeOfPlane();
+        static void calcSeats(int* firstClass, int* EconPlus, int* Econ, int total);
     private:
         std::string typeOfPlane;
 
