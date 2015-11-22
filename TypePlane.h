@@ -2,20 +2,19 @@
 // Created by thisguy on 11/22/15.
 //
 
-#ifndef DATASTRUCTURESFINALPROJECT_TYPEOFPLANES_H
-#define DATASTRUCTURESFINALPROJECT_TYPEOFPLANES_H
+#ifndef DATASTRUCTURESFINALPROJECT_TYPEPLANE_H
+#define DATASTRUCTURESFINALPROJECT_TYPEPLANE_H
+#include <iostream>
 
 namespace Airport {
-    static class TypePlane {
+    class TypePlane {
     public:
-        static enum {
-            A380 = 900,
-            A330 = 253,
-            C130 = 92,
-            Boeing747 = 330,
-            Boeing737 = 162,
-            L10011 = 190
-        };
+        TypePlane(std::string planeType);
+        int getNumOfSeats();
+        std::string getTypeOfPlane();
+    private:
+        std::string typeOfPlane;
+
     };
 }
-#endif //DATASTRUCTURESFINALPROJECT_TYPEOFPLANES_H
+#endif //DATASTRUCTURESFINALPROJECT_TYPEPLANE_H
