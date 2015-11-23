@@ -22,6 +22,7 @@ namespace Airport {
         int firstClass;
         int economyPlus;
         int economy;
+        int numOfRows;
     public:
         Plane();
         Plane(std::string theType, Fleet* theFleet, int theId);
@@ -36,6 +37,7 @@ namespace Airport {
         int getFirstClass() const ;
         int getEconomyPlus() const;
         int getEconomy() const;
+        int getRows() const;
         void _updateSeatTypes();
 
 
