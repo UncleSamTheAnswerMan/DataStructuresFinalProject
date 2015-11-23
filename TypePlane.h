@@ -7,15 +7,15 @@
 #include <iostream>
 
 namespace Airport {
-    class TypePlane {
+    static class TypePlane {
     public:
-        TypePlane(std::string planeType);
+        //TypePlane(std::string planeType);
         static int getNumOfSeats(std::string planeType);
-        std::string getTypeOfPlane();
+        //std::string getTypeOfPlane();
         static void calcSeats(int* firstClass, int* EconPlus, int* Econ, int total);
-        static int numRows(std::string planeType);
+        static int getNumOfRows(std::string planeType);
     private:
-        std::string typeOfPlane;
+        //std::string typeOfPlane;
 
     };
 }
