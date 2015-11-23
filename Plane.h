@@ -14,8 +14,7 @@
 namespace Airport {
     class Plane {
     private:
-        std::string model;
-        TypePlane planeType;
+        std::string planeType;
         Fleet* associatedFleet;
         int ID;
         Itinerary itinerary;
@@ -25,11 +24,9 @@ namespace Airport {
         int economy;
     public:
         Plane();
-        Plane(std::string theModel, TypePlane theType, Fleet* theFleet, int theId, int numSeats, int fc, int ep, int e);
-        void setType(const TypePlane planeType);
-        TypePlane getType() const;
-        void setModel(const std::string newModel);
-        std::string getModel() const;
+        Plane(std::string theType, Fleet* theFleet, int theId);
+        void setType(const std::string planeType);
+        std::string getType() const;
         void setFleet(const Fleet* newFleet);
         Fleet* getFleet() const;
         void setId(int newId);

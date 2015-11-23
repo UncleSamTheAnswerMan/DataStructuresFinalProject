@@ -11,20 +11,23 @@
 #include "Itinerary.h"
 using namespace std;
 namespace Airport {
-    Plane::Plane() : model(nullptr), planeType(nullptr), associatedFleet(nullptr), ID(-1), itinerary(new Itinerary()), noOfSeats(-1), firstClass(-1), economyPlus(-1), economy(-1) {}
-    Plane::Plane(string thisModel, TypePlane thisType, Fleet* thisFleet, int thisId, int numbSeats, int fc, int ep, int e) : model(thisModel), planeType(thisType), associatedFleet(thisFleet), ID(thisId), itinerary(new Itinerary()), noOfSeats(numbSeats), firstClass(fc), economyPlus(ep), economy(e) {}
+    Plane::Plane() : planeType(NULL), associatedFleet(nullptr), ID(-1), itinerary(new Itinerary()), noOfSeats(-1), firstClass(-1), economyPlus(-1), economy(-1) {}
+    Plane::Plane(string thisType, Fleet* thisFleet, int thisId) : planeType(thisType), associatedFleet(thisFleet), ID(thisId), itinerary(new Itinerary()){
+        if (planeType != NULL && planeType != "") {
+            TypePlane::getNumOfSeats(planeType);
+            TypePlane::calcSeats(&firstClass, &economyPlus, &economy, noOfSeats);
+        }
+    }
 
-    void Plane::setType(const TypePlane typePlane) {
+    void Plane::setType(const string typePlane) {
         planeType = typePlane;
+        if (planeType != NULL && planeType != "") {
+            TypePlane::getNumOfSeats(planeType);
+            TypePlane::calcSeats(&firstClass, &economyPlus, &economy, noOfSeats);
+        }
     }
-    TypePlane Plane::getType() const {
+    string Plane::getType() const {
         return planeType;
-    }
-    void Plane::setModel(const string newModel) {
-        model = newModel;
-    }
-    string Plane::getModel() const {
-        return model;
     }
     void Plane::setFleet(const Fleet* newFleet) {
         associatedFleet = newFleet;
