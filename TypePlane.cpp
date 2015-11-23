@@ -9,7 +9,7 @@ namespace Airport {
 //
 //    }
 
-    static int TypePlane::getNumOfSeats(std::string planeType) {
+    int TypePlane::getNumOfSeats(std::string planeType) {
         if (planeType.compare("A380")) {
             return 900;
         } else if (planeType.compare("A330")) {
@@ -27,7 +27,7 @@ namespace Airport {
         }
     }
 
-    static int TypePlane::getNumOfRows(std::string planeType) {
+    int TypePlane::getNumOfRows(std::string planeType) {
         if (planeType.compare("A380")) {
             return 900/10;
         } else if (planeType.compare("A330")) {
