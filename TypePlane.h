@@ -10,9 +10,10 @@ namespace Airport {
     class TypePlane {
     public:
         TypePlane(std::string planeType);
-        int getNumOfSeats();
+        static int getNumOfSeats(std::string planeType);
         std::string getTypeOfPlane();
         static void calcSeats(int* firstClass, int* EconPlus, int* Econ, int total);
+        static int numRows(std::string planeType);
     private:
         std::string typeOfPlane;
 

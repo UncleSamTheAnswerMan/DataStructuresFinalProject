@@ -9,18 +9,18 @@ namespace Airport {
 
     }
 
-    int TypePlane::getNumOfSeats() {
-        if (typeOfPlane.compare("A380")) {
+    static int TypePlane::getNumOfSeats(std::string planeType) {
+        if (planeType.compare("A380")) {
             return 900;
-        } else if (typeOfPlane.compare("A330")) {
-            return 253;
-        } else if (typeOfPlane.compare("C130")) {
-            return 92;
-        } else if (typeOfPlane.compare("Boeing747")) {
+        } else if (planeType.compare("A330")) {
+            return 250;
+        } else if (planeType.compare("C130")) {
+            return 90;
+        } else if (planeType.compare("Boeing747")) {
             return 330;
-        } else if (typeOfPlane.compare("Boeing737")) {
-            return 162;
-        } else if (typeOfPlane.compare("L1011")) {
+        } else if (planeType.compare("Boeing737")) {
+            return 160;
+        } else if (planeType.compare("L1011")) {
             return 190;
         } else {
             return -1;
@@ -36,4 +36,6 @@ namespace Airport {
         *econPlus = total * .2;
         *econ = total - *firstClass - *econPlus;
     }
+
+
 }
