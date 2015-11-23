@@ -14,8 +14,9 @@ namespace Airport {
     Plane::Plane() : planeType(NULL), associatedFleet(nullptr), ID(-1), itinerary(new Itinerary()), noOfSeats(-1), firstClass(-1), economyPlus(-1), economy(-1) {}
     Plane::Plane(string thisType, Fleet* thisFleet, int thisId) : planeType(thisType), associatedFleet(thisFleet), ID(thisId), itinerary(new Itinerary()){
         if (planeType != NULL && planeType != "") {
-            TypePlane::getNumOfSeats(planeType);
+            noOfSeats = TypePlane::getNumOfSeats(planeType);
             TypePlane::calcSeats(&firstClass, &economyPlus, &economy, noOfSeats);
+            numOfRows = TypePlane::getNumOfRows(planeType);
         }
     }
 
@@ -42,7 +43,7 @@ namespace Airport {
         return ID;
     }
     void Plane::showItinerary() {
-        int i = 0;
+        vector<Flight*>::iterator i;
         for (i = itinerary.getFlightList().begin(); i != itinerary.getFlightList().end; i++) {
             (*i)->printFlight();
         }
@@ -60,7 +61,10 @@ namespace Airport {
         return economy;
     }
     void Plane::_updateSeatTypes() {
-        planeType.calcSeats(&firstClass, &economyPlus, &economy, noOfSeats);
+        TypePlane::calcSeats(&firstClass, &economyPlus, &economy, noOfSeats);
+    }
+    int Plane::getRows() const {
+        return numOfRows;
     }
 }
 
