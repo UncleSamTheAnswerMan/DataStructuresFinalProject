@@ -31,15 +31,15 @@ namespace Airport {
         if (planeType.compare("A380")) {
             return 900/10;
         } else if (planeType.compare("A330")) {
-            return 250/8;
+            return 256/8;
         } else if (planeType.compare("C130")) {
             return 90/5;
         } else if (planeType.compare("Boeing747")) {
-            return 330/8;
+            return 336/8;
         } else if (planeType.compare("Boeing737")) {
-            return 160/7;
+            return 168/6;
         } else if (planeType.compare("L1011")) {
-            return 190/6;
+            return 192/6;
         } else {
             return -1;
         }

@@ -7,7 +7,7 @@
 #include <iostream>
 
 namespace Airport {
-    static class TypePlane {
+    class TypePlane {
     public:
         //TypePlane(std::string planeType);
         static int getNumOfSeats(std::string planeType);
