@@ -21,7 +21,11 @@ namespace Airport {
 
     }
 
-    Seat::Seat(const double basePrice, const Flight* flight, const Passenger* occupant)
+    Seat::Seat(const double basePrice, const Flight *flight) : thePrice(basePrice), theFlight(flight), theOccupant(nullptr) {
+
+    }
+
+    Seat::Seat(const double basePrice,  const Passenger* occupant, const Flight* flight)
             : thePrice(basePrice), theFlight(flight), theOccupant(occupant) {
 
     }
@@ -50,10 +54,8 @@ namespace Airport {
         theOccupant = occupant;
     }
 
+
     double Seat::calcPrice(double days, double miles) {
         return thePrice;
     }
-
-
-
 }

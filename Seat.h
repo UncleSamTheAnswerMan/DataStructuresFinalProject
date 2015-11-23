@@ -13,6 +13,7 @@ namespace Airport {
         Seat(const double basePrice);
         Seat(const Passenger* occupant);
         Seat(const Flight* flight);
+        Seat(const double basePrice, const Flight* flight);
         Seat(const double basePrice, const Passenger* occupant, const Flight* flight);
         Passenger* getOccupant() const;
         double getBasePrice() const;
@@ -27,7 +28,7 @@ namespace Airport {
     private:
         Flight* theFlight;
         double thePrice;
-        Occupant* theOccupant;
+        Passenger* theOccupant;
 
     };
 }
