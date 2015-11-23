@@ -23,7 +23,7 @@ namespace Airport {
         void setBasePrice(const double basePrice);
         void setFlight(const Flight* flight);
 
-        double calcPrice(double days, double miles);
+        double calcPrice(double days, double miles) const;
 
     private:
         Flight* theFlight;

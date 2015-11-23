@@ -55,7 +55,7 @@ namespace Airport {
     }
 
 
-    double Seat::calcPrice(double days, double miles) {
+    double Seat::calcPrice(double days, int miles) const {
         return thePrice;
     }
 }

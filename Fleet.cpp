@@ -3,15 +3,18 @@
 //
 #include <iostream>
 #include "Fleet.h"
+#include "Airport.h"
+#include "Plane.h"
+
 using namespace std;
 namespace Airport {
     Fleet::Fleet() : homePort(nullptr) {}
-    Fleet::Fleet(Aiport* port) : homePort(port) {}
+    Fleet::Fleet(Airport *port) : homePort(port) {}
 
-    void addPlane(Plane newPlane) {
+    void Fleet::addPlane(Plane newPlane) {
         Planes.push_back(newPlane);
     }
-    void delPlane(Plane oldPlane) {
+    void Fleet::delPlane(Plane oldPlane) {
         for (auto it=begin(Planes); it != end(Planes); ++it)
             if ((*it)->getId() == oldPlane->getId()) {
                 Planes.erase(it);

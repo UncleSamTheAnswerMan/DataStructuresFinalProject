@@ -14,7 +14,7 @@ namespace Airport {
     class Fleet {
     private:
         vector<Plane*> Planes;
-        Airport* homePort;
+        Airport *homePort;
     public:
         void addPlane(Plane newPlane);
         void deletePlane(Plane oldPlane);
