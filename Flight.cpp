@@ -3,6 +3,9 @@
 //
 
 #include "Flight.h"
+#include "FirstClass.h"
+#include "EconPlus.h"
+#include "EconSeat.h"
 #include <cmath>
 
 namespace Airport {
@@ -11,8 +14,7 @@ namespace Airport {
             int numSeats = TypePlane::getNumOfSeats(planeType);
             TypePlane::calcSeats(&numFirstClass, &numEconPlus, &numEcon, numSeats);
             numRows = TypePlane::getNumOfRows(planeType);
-            rowsForEcon = numRows/2;
-            rowsForFirst = rowsForPlus = rowsForEcon/2;
+
         }
     }
 
@@ -23,9 +25,6 @@ namespace Airport {
         numEconPlus = thePlane->getEconomyPlus();
         numEcon = thePlane->getEconomy();
         numRows = thePlane->getRows();
-        rowsForEcon = numRows/2;
-        rowsForFirst = floor((double)rowsForEcon/2);
-        rowsForPlus = ceil((double)rowsForEcon/2);
 
     }
 
@@ -66,12 +65,53 @@ namespace Airport {
 
     }
 
-    void Flight::_initSeatList() {//TODO in the middle of this function, still have lots of others to do to finish Flight class
+    void Flight::_initSeatList() {
+        rowsForEcon = numRows/2;
+        rowsForFirst = floor((double)rowsForEcon/2);
+        rowsForPlus = ceil((double)rowsForEcon/2);
+
         int seatRowFirst = numFirstClass/rowsForFirst;
         int seatRowPlus = numEconPlus/rowsForPlus;
         int seatRowEcon = numEcon/rowsForEcon;
-        for (int i = 0; i < rowsForFirst; i++) {
 
+        aisleFirst = floor((double)seatRowFirst/2);
+        aislePlus = floor((double)seatRowPlus/2);
+        aisleEcon = floor((double)seatRowEcon/2);
+
+        for (int i = 0; i < rowsForFirst; i++) {
+            for (int j = 0; j < seatRowFirst; j++) {
+                Seat *temp;
+                if (j == aisleFirst) {
+                    temp = new AisleSeat();
+                } else {
+                    temp = new FirstClass(basePrice, this);
+                }
+                SeatList.push_back(temp);
+            }
+        }
+
+        for (int i = 0; i < rowsForPlus; i++) {
+            for (int j = 0; j < seatRowPlus; j++) {
+                Seat *temp;
+                if (j == aislePlus) {
+                    temp = new AisleSeat();
+                } else {
+                    temp = new EconPlus(basePrice, this);
+                }
+                SeatList.push_back(temp);
+            }
+        }
+
+        for (int i = 0; i < rowsForFirst; i++) {
+            for (int j = 0; j < seatRowFirst; j++) {
+                Seat *temp;
+                if (j == aisleFirst) {
+                    temp = new AisleSeat();
+                } else {
+                    temp = new EconSeat(basePrice, this);
+                }
+                SeatList.push_back(temp);
+            }
         }
     }
 }

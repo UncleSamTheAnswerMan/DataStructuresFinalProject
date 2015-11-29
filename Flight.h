@@ -52,6 +52,7 @@ namespace Airport {
         int numEcon;
         int numRows;
         int rowsForFirst, rowsForPlus, rowsForEcon;
+        int aisleFirst, aislePlus, aisleEcon;
         double basePrice;
         string destination;
         string planeType;
