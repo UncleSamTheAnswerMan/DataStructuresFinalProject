@@ -15,24 +15,26 @@ namespace Airport {
     class Flight {
     public:
         Flight(string typeOfPlane);
-        Flight(int newID, Plane* plane, time_t departTime, time_t arriveTime, double price);
+        Flight(int newID, Plane* plane, time_t departTime, time_t arriveTime, double price, string end, string start);
         int getID() const;
+        string getStartingPoint() const;
         string getDestination() const;
         time_t getDepart() const;
         time_t getArrival() const;
         Plane* getPlane() const;
         //Airport* getLayover() const;
-        Passenger* getPassengerForSeat(string seat);
-        Passenger* getPassengerForSeat(Seat* seat);
-        Seat* getSeatForPassenger(int passID);
+        Passenger* getPassengerForSeat(string seat)const;
+        Passenger* getPassengerForSeat(Seat* seat)const;
+        Seat* getSeatForPassenger(int passID)const;
 
         void setID(const int newID);
+        void setStartingPoint(const string newStart);
         void setDest(const string newDest);
         void setDepart(const time_t depTime);
         void setArrive(const time_t arrTime);
         void setPlane(const Plane* plane);
-        void bookFlight(const Passenger* passenger, const string chosenSeat);
-        void bookFlight(const Passenger* passenger, const Seat* chosenSeat);
+        int bookFlight(Passenger* passenger, string chosenSeat);
+        int bookFlight(Passenger* passenger, Seat* chosenSeat);
         void cancelBooking(const Passenger* passenger);
         void cancelBooking(const int passID);
 
@@ -41,9 +43,8 @@ namespace Airport {
         void showPassengers();
 
         void _initSeatList();
-        Seat* _seatStringConvert(string seatString);
 
-        void PrintFlight();
+        void printFlight() const;
 
     private:
         int ID;
@@ -52,8 +53,10 @@ namespace Airport {
         int numEcon;
         int numRows;
         int rowsForFirst, rowsForPlus, rowsForEcon;
+        int seatRowFirst, seatRowPlus, seatRowEcon;
         int aisleFirst, aislePlus, aisleEcon;
         double basePrice;
+        string startingPoint;
         string destination;
         string planeType;
         time_t departureTime;
