@@ -66,5 +66,8 @@ namespace Airport {
     int Plane::getRows() const {
         return numOfRows;
     }
+    void Plane::printPlane() {
+        cout << "ID: " << ID << " Type: " << planeType << endl;
+    }
 }
 

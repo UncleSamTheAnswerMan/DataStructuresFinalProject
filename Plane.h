@@ -39,6 +39,7 @@ namespace Airport {
         int getEconomy() const;
         int getRows() const;
         void _updateSeatTypes();
+        void printPlane();
 
 
     };

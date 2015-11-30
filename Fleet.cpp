@@ -21,5 +21,18 @@ namespace Airport {
             }
 
     }
+    int Fleet::getFleetSize() const {
+        return Planes.size();
+    }
+    void Fleet::showFleet () {
+        for (int  i=0; i<Planes.size(); i++)
+        {
+            cout << i << " ";
+            Planes[i]->printPlane();
+        }
+    }
+    Plane* Fleet::getPlaneByIndex(int i) {
+        return Planes[i];
+    }
 
 }

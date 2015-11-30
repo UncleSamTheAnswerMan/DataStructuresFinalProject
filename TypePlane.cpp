@@ -3,12 +3,21 @@
 //
 
 #include "TypePlane.h"
+using namespace std;
 
 namespace Airport {
 //    TypePlane::TypePlane(std::string planeType) : typeOfPlane(planeType) {
 //
 //    }
 
+    void TypePlane::printTypes() {
+        cout << "1 A380" << endl;
+        cout << "2 A330" << endl;
+        cout << "3 C130" << endl;
+        cout << "4 Boeing747" << endl;
+        cout << "5 Boeing 737" << endl;
+        cout << "6 L1011" << endl;
+    }
     int TypePlane::getNumOfSeats(std::string planeType) {
         if (planeType.compare("A380")) {
             return 900;

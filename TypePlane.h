@@ -9,6 +9,7 @@
 namespace Airport {
     class TypePlane {
     public:
+        static void printTypes();
         //TypePlane(std::string planeType);
         static int getNumOfSeats(std::string planeType);
         //std::string getTypeOfPlane();

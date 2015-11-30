@@ -13,8 +13,8 @@ namespace Airport {
     public:
         Menu();
         Menu(Airport * airport);
-        void addPlane(Plane* p) const;
-        void deletePlane(Plane * p) const;
+        void addPlaneMenu() const;
+        void deletePlaneMenu(Plane * p) const;
         void bookFlightMenu(Flight* f) const;
         void createPassenger();
         void deletePassenger(Passenger * p);
@@ -24,6 +24,7 @@ namespace Airport {
         void changePlaneFlight(Flight* f, Plane* p);
         void outputToFile();
         void textGUI();
+        int getOption();
     private:
         Airport* airport;
 

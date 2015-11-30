@@ -20,6 +20,9 @@ namespace Airport {
         Fleet(Airport* a);
         void addPlane(Plane* newPlane);
         void deletePlane(Plane* oldPlane);
+        int getFleetSize() const;
+        void showFleet();
+        Plane* getPlaneByIndex(int i);
     };
 
 
