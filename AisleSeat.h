@@ -12,7 +12,7 @@ namespace Airport {
     public:
         AisleSeat(Flight *f);
         virtual double calcPrice(int days, int miles);
-        virtual Passenger* getOccupant();
+        virtual Passenger* getOccupant() const;
         virtual int getRow() const;
         virtual char getSeat() const;
 

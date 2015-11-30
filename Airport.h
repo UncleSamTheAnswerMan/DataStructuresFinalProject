@@ -9,6 +9,7 @@
 #include "Passenger.h"
 #include "Plane.h"
 #include <vector>
+using std::vector;
 namespace Airport {
     class Airport {
     public:

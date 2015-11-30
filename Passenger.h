@@ -8,6 +8,7 @@
 #include "Flight.h"
 #include "Seat.h"
 #include <vector>
+using std::vector;
 namespace Airport {
     class Passenger {
     private:

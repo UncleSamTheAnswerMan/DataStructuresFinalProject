@@ -12,7 +12,7 @@ namespace Airport {
     double AisleSeat::calcPrice(int days, int miles) {
         return 0.0;
     }
-    Passenger* AisleSeat::getOccupant() {
+    Passenger* AisleSeat::getOccupant() const{
         return nullptr;
     }
     int AisleSeat::getRow() const {
