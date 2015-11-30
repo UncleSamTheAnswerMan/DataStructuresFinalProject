@@ -11,14 +11,15 @@ namespace Airport {
     Fleet::Fleet() : homePort(nullptr) {}
     Fleet::Fleet(Airport *port) : homePort(port) {}
 
-    void Fleet::addPlane(Plane newPlane) {
+    void Fleet::addPlane(Plane* newPlane) {
         Planes.push_back(newPlane);
     }
-    void Fleet::delPlane(Plane oldPlane) {
+    void Fleet::deletePlane(Plane* oldPlane) {
         for (auto it=begin(Planes); it != end(Planes); ++it)
             if ((*it)->getId() == oldPlane->getId()) {
                 Planes.erase(it);
             }
+
     }
 
 }

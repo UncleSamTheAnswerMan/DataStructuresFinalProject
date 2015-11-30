@@ -18,13 +18,14 @@ namespace Airport {
     public:
         Passenger();
         Passenger(std::string fName, std::string lName, int ID);
-        void updateFlight(Flight flightToChange);
+        void updateFlight(Flight* flightToChange);
         std::string getFirstName();
         void setFirstName(std::string newFirstName);
         std::string getLastName();
         void setLastName(std::string newLastName);
         int getId();
         void setId(int newId);
+        void printPassenger() const;
 
     };
 

@@ -26,6 +26,25 @@ namespace Airport {
     void Passenger::setId(int newId) {
         ID = newId;
     }
-
+    void Passenger::printPassenger() const {
+        cout << firstName << " " << lastName << " " << ID << endl;
+    }
+    void Passenger::updateFlight(Flight* f) {
+        bool found  = false;
+        if (!Flights.empty())
+        {
+            for (int  i=0; i<Flights.size(); i++)
+            {
+                if (Flights[i] == f) {
+                    found = true;
+                    cout << "That flight is already in your flight list" << endl;
+                    break;
+                }
+            }
+        }
+        if (found == false) {
+            Flights.push_back(f);
+        }
+    }
 
 }

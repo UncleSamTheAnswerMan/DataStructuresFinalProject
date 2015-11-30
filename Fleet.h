@@ -16,8 +16,10 @@ namespace Airport {
         vector<Plane*> Planes;
         Airport *homePort;
     public:
-        void addPlane(Plane newPlane);
-        void deletePlane(Plane oldPlane);
+        Fleet();
+        Fleet(Airport* a);
+        void addPlane(Plane* newPlane);
+        void deletePlane(Plane* oldPlane);
     };
 
 
