@@ -11,10 +11,10 @@ namespace Airport {
     public:
         Seat();
         Seat(const double basePrice);
-        Seat(const Passenger* occupant);
-        Seat(const Flight* flight);
-        Seat(const double basePrice, const Flight* flight);
-        Seat(const double basePrice, const Passenger* occupant, const Flight* flight);
+        Seat(const Passenger * const occupant);
+        Seat(const Flight * const flight);
+        Seat(const double basePrice, const Flight * const flight);
+        Seat(const double basePrice, const Passenger * const occupant, const Flight* flight);
         Passenger* getOccupant() const;
         double getBasePrice() const;
         Flight* getFlight() const;

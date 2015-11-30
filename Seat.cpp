@@ -54,8 +54,24 @@ namespace Airport {
         theOccupant = occupant;
     }
 
+    void Seat::setSeat(const char s) {
+        seat = s;
+    }
 
-    double Seat::calcPrice(double days, int miles) const {
+    void Seat::setRow(const int r) {
+        row = r;
+    }
+
+    char Seat::getSeat() const {
+        return seat;
+    }
+
+    int Seat::getRow() const {
+        return row;
+    }
+
+
+    double Seat::calcPrice(double days, double miles) const {
         return thePrice;
     }
 }
