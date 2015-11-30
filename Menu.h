@@ -23,6 +23,7 @@ namespace Airport {
         void showFlights();
         void changePlaneFlight(Flight* f, Plane* p);
         void outputToFile();
+        void textGUI();
     private:
         Airport* airport;
 

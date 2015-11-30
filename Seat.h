@@ -22,6 +22,11 @@ namespace Airport {
         void setOccupant(const Passenger* occupant);
         void setBasePrice(const double basePrice);
         void setFlight(const Flight* flight);
+        void setSeat(const char s);
+        void setRow(const int r);
+        char getSeat() const;
+        int getRow() const;
+
 
         double calcPrice(double days, double miles) const;
 
@@ -29,6 +34,8 @@ namespace Airport {
         Flight* theFlight;
         double thePrice;
         Passenger* theOccupant;
+        int row;
+        char seat;
 
     };
 }

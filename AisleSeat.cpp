@@ -5,11 +5,20 @@
 #include "AisleSeat.h"
 
 namespace Airport {
-    AisleSeat::AisleSeat() : Seat::Seat() {double thePrice = 0.0;}
-    virtual double AisleSeat::calcPrice(int days, int miles) {
+    AisleSeat::AisleSeat(Flight* f) : Seat::Seat(0,f) {
+
+    }
+
+    double AisleSeat::calcPrice(int days, int miles) {
         return 0.0;
     }
     Passenger* AisleSeat::getOccupant() {
         return nullptr;
+    }
+    int AisleSeat::getRow() const {
+        return -1;
+    }
+    char AisleSeat::getSeat() const {
+        return ' ';
     }
 }

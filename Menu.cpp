@@ -55,4 +55,7 @@ namespace Airport {
     void Menu::outputToFile() {
 
     }
+    void textGUI() {
+
+    }
 }

@@ -10,11 +10,13 @@
 namespace Airport {
     class AisleSeat : public Seat {
     public:
-        AisleSeat();
+        AisleSeat(Flight *f);
         virtual double calcPrice(int days, int miles);
-        Passenger* getOccupant();
-    private:
-        double thePrice = 0.0;
+        virtual Passenger* getOccupant();
+        virtual int getRow() const;
+        virtual char getSeat() const;
+
+
     };
 }
 #endif
