@@ -6,6 +6,7 @@
 #define DATASTRUCTURESFINALPROJECT_ECONPLUS_H
 #include "Seat.h"
 #include "Flight.h"
+
 namespace Airport {
 
     class EconPlus : public Seat {//EconPlusSeat inherits from SeatBaseType

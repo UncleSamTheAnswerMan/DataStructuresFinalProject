@@ -2,10 +2,10 @@
 // Created by heyi1sam on 10/13/15.
 //
 
-#ifndef DATASTRUCTURESFINALPROJECT_FIRSTCLASS_H
-#define DATASTRUCTURESFINALPROJECT_FIRSTCLASS_H
-#include "Flight.h"
+#ifndef DATASTRUCTURESFINALPROJECT_ECONSEAT_H
+#define DATASTRUCTURESFINALPROJECT_ECONSEAT_H
 #include "Seat.h"
+#include "Flight.h"
 
 namespace Airport {
 

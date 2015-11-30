@@ -4,8 +4,8 @@
 
 #ifndef DATASTRUCTURESFINALPROJECT_FIRSTCLASS_H
 #define DATASTRUCTURESFINALPROJECT_FIRSTCLASS_H
-#include "Flight.h"
 #include "Seat.h"
+#include "Flight.h"
 
 namespace Airport {
 

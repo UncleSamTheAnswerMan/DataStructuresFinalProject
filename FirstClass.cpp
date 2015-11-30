@@ -4,6 +4,8 @@
 
 #include "FirstClass.h"
 #include "Seat.h"
+#include "Flight.h"
+
 namespace Airport {
     FirstClass::FirstClass() { }
 

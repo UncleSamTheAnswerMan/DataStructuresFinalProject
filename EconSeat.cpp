@@ -2,8 +2,9 @@
 // Created by heyi1sam on 10/13/15.
 //
 
-#include <iostream>
 #include "EconSeat.h"
+#include "Seat.h"
+#include "Flight.h"
 
 namespace Airport {
     EconSeat::EconSeat() {}

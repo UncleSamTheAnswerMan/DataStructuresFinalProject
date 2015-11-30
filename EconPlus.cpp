@@ -3,7 +3,7 @@
 //
 
 #include "EconPlus.h"
-#include <iostream>
+#include "Seat.h"
 #include "Flight.h"
 
 namespace Airport {
