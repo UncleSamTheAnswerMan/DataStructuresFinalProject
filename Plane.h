@@ -12,6 +12,10 @@
 #include "Itinerary.h"
 
 namespace Airport {
+    class Fleet;
+    class Flight;
+    class Seat;
+    class TypePlane;
     class Plane {
     private:
         std::string planeType;

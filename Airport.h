@@ -7,10 +7,14 @@
 #include "Flight.h"
 #include "Plane.h"
 #include "Passenger.h"
-#include "Plane.h"
+#include "Fleet.h"
 #include <vector>
 using std::vector;
 namespace Airport {
+    class Flight;
+    class Plane;
+    class Passenger;
+    class Fleet;
     class Airport {
     public:
         Airport();

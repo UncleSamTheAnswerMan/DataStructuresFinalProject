@@ -11,6 +11,10 @@
 #include "Airport.h"
 #include <vector>
 namespace Airport {
+    class Plane;
+    class Passenger;
+    class Flight;
+    class Airport;
     class Fleet {
     private:
         vector<Plane*> Planes;

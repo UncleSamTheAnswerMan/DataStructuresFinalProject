@@ -9,9 +9,13 @@
 #include <vector>
 #include "Passenger.h"
 #include "Plane.h"
+#include "Seat.h"
 
 using namespace std;
 namespace Airport {
+    class Plane;
+    class Passenger;
+    class Seat;
     class Flight {
     public:
         Flight(string typeOfPlane);

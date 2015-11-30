@@ -10,6 +10,8 @@
 #include <vector>
 using std::vector;
 namespace Airport {
+    class Flight;
+    class Seat;
     class Passenger {
     private:
         std::string firstName;

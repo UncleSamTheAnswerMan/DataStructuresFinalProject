@@ -5,8 +5,8 @@
 #ifndef DATASTRUCTURESFINALPROJECT_AISLESEAT_H
 #define DATASTRUCTURESFINALPROJECT_AISLESEAT_H
 
-#include "AisleSeat.h"
 #include "Seat.h"
+
 namespace Airport {
     class AisleSeat : public Seat {
     public:

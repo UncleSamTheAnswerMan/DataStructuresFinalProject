@@ -8,7 +8,7 @@
 #include "Flight.h"
 
 namespace Airport {
-
+    class Flight;
     class FirstClass : public Seat{//FirstClassSeat inherits from SeatBaseType
     public:
         virtual double calcPrice(int days, int miles) const;//Virtual for subtype polymorph

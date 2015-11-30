@@ -7,6 +7,8 @@
 #include "Passenger.h"
 #include "Flight.h"
 namespace Airport {
+    class Flight;
+    class Passenger;
     class Seat {
     public:
         Seat();

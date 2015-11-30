@@ -8,7 +8,7 @@
 #include "Flight.h"
 
 namespace Airport {
-
+    class Flight;
     class EconSeat : public Seat {//EconSeat inherits from SeatBaseType
     public:
         EconSeat();
