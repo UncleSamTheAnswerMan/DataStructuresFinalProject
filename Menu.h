@@ -8,20 +8,29 @@
 #include "Flight.h"
 #include "Fleet.h"
 #include "Passenger.h"
+#include "TypePlane.h"
 namespace Airport {
     class Menu {
     public:
         Menu();
         Menu(Airport * airport);
+        string userTypePlane() const;
+        Plane* userPlane() const ;
+        Passenger* userPassenger() const;
+        int createPlaneId() const ;
+        double userBasePrice() const ;
+        string userStartLocation()const ;
+        string userEndLocation()const ;
+        Flight* userFlight()const ;
         void addPlaneMenu() const;
-        void deletePlaneMenu(Plane * p) const;
-        void bookFlightMenu(Flight* f) const;
+        void deletePlaneMenu() const;
+        void bookFlightMenu() const;
         void createPassenger();
-        void deletePassenger(Passenger * p);
-        void addFlight(const Flight* f);
-        void deleteFlight(const Flight* f);
+        void deletePassenger();
+        void addFlight();
+        void deleteFlight();
         void showFlights();
-        void changePlaneFlight(Flight* f, Plane* p);
+        void changePlaneFlight();
         void outputToFile();
         void textGUI();
         int getOption();
