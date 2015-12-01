@@ -39,6 +39,18 @@ namespace Airport {
         }
 
     }
+    Flight* Airport::getFlightByIndex(int i) {
+        if (0 <= i < flightSchedule.size()) {
+            return flightSchedule[i];
+        }
+        else {
+            cout << "The flight you have requested is not in the schedule." << endl;
+        }
+
+    }
+    int Airport::getSizeOfFlightSchedule() {
+        return flightSchedule.size();
+    }
     int Airport::getSizeOfPassList() {
         return passengerList.size();
     }
@@ -68,6 +80,7 @@ namespace Airport {
     void Airport::printFlights() {
         for (int  i=0; i<flightSchedule.size(); i++)
         {
+            cout << i << " ";
             flightSchedule[i]->printFlight();
         }
     }
@@ -77,5 +90,9 @@ namespace Airport {
             passengerList[i]->printPassenger();
         }
     }
+    void Airport::printFleet() {
+        fleet->showFleet();
+    }
+
 
 }

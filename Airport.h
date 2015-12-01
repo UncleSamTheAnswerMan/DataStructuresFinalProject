@@ -28,6 +28,8 @@ namespace Airport {
         Fleet* getFleet() const;
         void printFlights();
         void printPassengers();
+        void printFleet();
+        Flight* getFlightByIndex(int i);
 
 
     private:
