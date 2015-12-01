@@ -36,12 +36,15 @@ namespace Airport {
         Fleet* getFleet() const;
         void setId(int newId);
         int getId() const;
-        void showItinerary();
+        void showItinerary()const;
+        void showSoonestFlight()const;
         int getTotalNoSeats() const;
         int getFirstClass() const ;
         int getEconomyPlus() const;
         int getEconomy() const;
         int getRows() const;
+        void addFlightToItinerary(const Flight* flightToAdd);
+        void deleteFlightFromItinerary(const Flight* flightToDelete);
         void _updateSeatTypes();
         void printPlane();
 

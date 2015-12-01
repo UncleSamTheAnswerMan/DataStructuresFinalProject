@@ -11,8 +11,8 @@
 #include "Itinerary.h"
 using namespace std;
 namespace Airport {
-    Plane::Plane() : planeType(NULL), associatedFleet(nullptr), ID(-1), itinerary(new Itinerary()), noOfSeats(-1), firstClass(-1), economyPlus(-1), economy(-1) {}
-    Plane::Plane(string thisType, Fleet* thisFleet, int thisId) : planeType(thisType), associatedFleet(thisFleet), ID(thisId), itinerary(new Itinerary()){
+    Plane::Plane() : planeType(NULL), associatedFleet(nullptr), ID(-1), itinerary(), noOfSeats(-1), firstClass(-1), economyPlus(-1), economy(-1) {}
+    Plane::Plane(string thisType, Fleet* thisFleet, int thisId) : planeType(thisType), associatedFleet(thisFleet), ID(thisId), itinerary(){
         if (planeType != NULL && planeType != "") {
             noOfSeats = TypePlane::getNumOfSeats(planeType);
             TypePlane::calcSeats(&firstClass, &economyPlus, &economy, noOfSeats);
@@ -42,11 +42,11 @@ namespace Airport {
     int Plane::getId() const {
         return ID;
     }
-    void Plane::showItinerary() {
-        vector<Flight*>::iterator i;
-        for (i = itinerary.getFlightList().begin(); i != itinerary.getFlightList().end; i++) {
-            (*i)->printFlight();
-        }
+    void Plane::showItinerary() const{
+        itinerary.showAllFlights();
+    }
+    void Plane::showSoonestFlight() const{
+        itinerary.showNextFlight();
     }
     int Plane::getTotalNoSeats() const {
         return noOfSeats;
@@ -60,14 +60,24 @@ namespace Airport {
     int Plane::getEconomy() const {
         return economy;
     }
-    void Plane::_updateSeatTypes() {
-        TypePlane::calcSeats(&firstClass, &economyPlus, &economy, noOfSeats);
-    }
     int Plane::getRows() const {
         return numOfRows;
     }
     void Plane::printPlane() {
         cout << "ID: " << ID << " Type: " << planeType << endl;
+    }
+    void Plane::addFlightToItinerary(const Flight *flightToAdd) {
+        if (itinerary.addFlight(flightToAdd) == 0) {
+            cout << "Flight " << flightToAdd->getID() << " successfully added to Plane " << ID << endl;
+        }
+    }
+    void Plane::deleteFlightFromItinerary(const Flight *flightToDelete) {
+        if (itinerary.deleteFlight(flightToDelete) == 0) {
+            cout << "Flight " << flightToDelete->getID() << " successfully removed from Plane " << ID << endl;
+        }
+    }
+    void Plane::_updateSeatTypes() {
+        TypePlane::calcSeats(&firstClass, &economyPlus, &economy, noOfSeats);
     }
 }
 
