@@ -16,12 +16,13 @@ namespace Airport {
     class Flight;
     class Seat;
     class TypePlane;
+    class Itinerary;
     class Plane {
     private:
         std::string planeType;
         Fleet* associatedFleet;
         int ID;
-        Itinerary itinerary;
+        Itinerary* itinerary;
         int noOfSeats;
         int firstClass;
         int economyPlus;
@@ -32,7 +33,7 @@ namespace Airport {
         Plane(std::string theType, Fleet* theFleet, int theId);
         void setType(const std::string planeType);
         std::string getType() const;
-        void setFleet(const Fleet* newFleet);
+        void setFleet(Fleet* newFleet);
         Fleet* getFleet() const;
         void setId(int newId);
         int getId() const;
@@ -43,8 +44,8 @@ namespace Airport {
         int getEconomyPlus() const;
         int getEconomy() const;
         int getRows() const;
-        void addFlightToItinerary(const Flight* flightToAdd);
-        void deleteFlightFromItinerary(const Flight* flightToDelete);
+        void addFlightToItinerary(Flight* flightToAdd);
+        void deleteFlightFromItinerary(Flight* flightToDelete);
         void _updateSeatTypes();
         void printPlane();
 
