@@ -7,18 +7,19 @@
 
 
 #include "Flight.h"
-
+#include <vector>
+using std::vector;
 namespace Airport {
 
     class Itinerary {
     public:
         Itinerary();
-        int addFlight(const Flight* flightToAdd);
-        int deleteFlight(const Flight* flightToDelete);
+        int addFlight(Flight* flightToAdd);
+        int deleteFlight(Flight* flightToDelete);
         Flight* findFlightByTime(const time_t timeToFind);
         Flight* findFlightByID(const int flightID);
-        void showAllFlights()const;
-        void showNextFlight()const;
+        void showAllFlights();
+        void showNextFlight();
         //TODO add sort method
     private:
         vector<Flight*> flightList;

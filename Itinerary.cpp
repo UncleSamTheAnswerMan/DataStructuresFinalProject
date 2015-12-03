@@ -3,10 +3,11 @@
 //
 
 #include "Itinerary.h"
+using std::vector;
 namespace Airport {
-    Itinerary::Itinerary() { }
+    Itinerary::Itinerary() : flightList() { }
 
-    int Itinerary::addFlight(const Flight *flightToAdd) { //TODO add error checking to prevent paradoxes in the time-space continuum
+    int Itinerary::addFlight(Flight *flightToAdd) { //TODO add error checking to prevent paradoxes in the time-space continuum
         vector<Flight*>::iterator iter;
         for(iter = flightList.begin(); iter!=flightList.end(); iter++){
             if ((*iter)->getID() == flightToAdd->getID()) {
@@ -18,7 +19,7 @@ namespace Airport {
         return 0;
     }
 
-    int Itinerary::deleteFlight(const Flight *flightToDelete) {
+    int Itinerary::deleteFlight(Flight *flightToDelete) {
         vector<Flight*>::iterator iter;
         for(iter = flightList.begin(); iter!=flightList.end(); iter++){
             if ((*iter)->getID() == flightToDelete->getID()) {
@@ -32,18 +33,18 @@ namespace Airport {
 
     Flight* Itinerary::findFlightByTime(const time_t timeToFind) {
         vector<Flight*>::iterator iter;
-        for (iter = flightList.begin(); iter!=flightList.end(); iter++){
+        for (iter = flightList.begin(); iter!=flightList.end(); ++iter){
             if ((*iter)->getDepart() == timeToFind) {
                 return (*iter);
             }
         }
-        cout<<"Flight not found..." << endl;
+        cout<<"Flight not fItineraryound..." << endl;
         return nullptr;
     }
 
     Flight* Itinerary::findFlightByID(const int flightID) {
         vector<Flight*>::iterator iter;
-        for(iter = flightList.begin(); iter!=flightList.end(); iter++) {
+        for(iter = flightList.begin(); iter!=flightList.end(); ++iter) {
             if ((*iter)->getID() == flightID) {
                 return (*iter);
             }
@@ -52,17 +53,17 @@ namespace Airport {
         return nullptr;
     }
 
-    void Itinerary::showAllFlights() const {
+    void Itinerary::showAllFlights() {
         vector<Flight*>::iterator iter;
-        for(iter = flightList.begin(); iter!=flightList.end(); iter++){
+        for(iter = flightList.begin(); iter!=flightList.end(); ++iter){
             (*iter)->printFlight();
         }
     }
 
-    void Itinerary::showNextFlight() const{
+    void Itinerary::showNextFlight() {
         Flight* nextFlight = flightList[0];
         vector<Flight*>::iterator iter;
-        for(iter = flightList.begin(); iter!=flightList.end(); iter++) {
+        for(iter = flightList.begin(); iter!=flightList.end(); ++iter) {
             if ((*iter)->getDepart() < nextFlight->getDepart()) {
                 nextFlight = (*iter);
             }
