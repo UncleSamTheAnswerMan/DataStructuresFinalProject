@@ -9,19 +9,19 @@
 using namespace std;
 
 namespace Airport {
-    Airport::Airport() : flightSchedule(nullptr), fleet(nullptr), passengerList(nullptr) {
+    Airport::Airport() : fleet(nullptr) {
 
     }
-    Airport::Airport(vector<Flight*>flightSched, Fleet* fleetList, vector<Passenger*> passList) : flightSchedule(flightSched), fleet(fleetList), passengerList(passList) {
-
-    }
-    void Airport::addFlightToSchedule(const Flight *newFlight) {
+//    Airport::Airport(vector<Flight*>flightSched, Fleet* fleetList, vector<Passenger*> passList) : flightSchedule(flightSched), fleet(fleetList), passengerList(passList) {
+//
+//    }
+    void Airport::addFlightToSchedule(Flight *newFlight) {
         flightSchedule.push_back(newFlight);
     }
-    void Airport::addPassengerToList(const Passenger *newPass) {
+    void Airport::addPassengerToList(Passenger *newPass) {
         passengerList.push_back(newPass);
     }
-    void Airport::deleteFlightFromSchedule(const Flight *flightDelete) {
+    void Airport::deleteFlightFromSchedule(Flight *flightDelete) {
         bool found  = false;
         if (!flightSchedule.empty())
         {
@@ -34,7 +34,7 @@ namespace Airport {
                 }
             }
         }
-        if (found == false) {
+        if (!found) {
             cout << "The flight is not in the flight schedule." << endl;
         }
 
@@ -67,11 +67,11 @@ namespace Airport {
                 }
             }
         }
-        if (found == false) {
+        if (!found) {
             cout << "The passenger is not in the passenger list." << endl;
         }
     }
-    void Airport::setFleet(const Fleet *newFleet) {
+    void Airport::setFleet(Fleet *newFleet) {
         fleet = newFleet;
     }
     Fleet* Airport::getFleet() const {

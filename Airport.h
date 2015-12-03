@@ -18,13 +18,14 @@ namespace Airport {
     class Airport {
     public:
         Airport();
-        Airport(vector<Flight*> fsched, Fleet* flist, vector<Passenger*> plist);
-        void addFlightToSchedule(const Flight* newFlight);
-        void addPassengerToList(const Passenger* newPass);
-        void deleteFlightFromSchedule(const Flight * flightDelete);
+        //Airport(vector<Flight*> fsched, Fleet* flist, vector<Passenger*> plist);
+        void addFlightToSchedule(Flight* newFlight);
+        void addPassengerToList(Passenger* newPass);
+        void deleteFlightFromSchedule(Flight * flightDelete);
         void deletePassengerFromList(Passenger* passDelete);
-        void setFleet(const Fleet* newFleet);
+        void setFleet(Fleet* newFleet);
         int getSizeOfPassList();
+        int getSizeOfFlightSchedule();
         Fleet* getFleet() const;
         void printFlights();
         void printPassengers();
