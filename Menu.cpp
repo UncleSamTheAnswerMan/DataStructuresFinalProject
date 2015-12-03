@@ -142,7 +142,7 @@ namespace Airport {
     void Menu::outputToFile() {
 
     }
-    int getOption() {
+    int Menu::getOption() {
         int chosenOption;
         cout << "Select the number next to the option you are interested in: " << endl;
         cout << "1 Add a plane to the fleet" << endl;
@@ -154,7 +154,7 @@ namespace Airport {
         cout << "7 Delete a flight" << endl;
         cout << "8 Show flights" << endl;
         cout << "9 Change a plane's flight" << endl;
-        cout << "10 Close and output data to file" << endl;
+        cout << "10 Save and Quit" << endl;
         cin >> chosenOption;
         return chosenOption;
     }
@@ -181,7 +181,7 @@ namespace Airport {
             } else if (option == 9) {
                 changePlaneFlight();
             } else if (option == 10) {
-                outputToFile();
+                keepGoing = false;
             } else {
                 cout << "You did not pick a valid option." << endl;
                 textGUI();
@@ -189,14 +189,8 @@ namespace Airport {
             cout << "Would you like to select another option?" << endl;
             string answer;
             cin >> answer;
-            if (answer[0] == 'y') {
-                keepGoing = true;
-            }
-            else if (answer[0] == 'Y') {
-                keepGoing = true;
-            } else {
-                keepGoing = false;
-            }
+            keepGoing = (answer[0] == 'y' || answer[0] == 'Y');
         }
+        outputToFile();
     }
 }
