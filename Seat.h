@@ -13,17 +13,17 @@ namespace Airport {
     public:
         Seat();
         Seat(const double basePrice);
-        Seat(const Passenger * const occupant);
-        Seat(const Flight * const flight);
-        Seat(const double basePrice, const Flight * const flight);
-        Seat(const double basePrice, const Passenger * const occupant, const Flight* flight);
+        Seat(Passenger * const occupant);
+        Seat(Flight * const flight);
+        Seat(const double basePrice, Flight * const flight);
+        Seat(const double basePrice, Passenger * const occupant, Flight* flight);
         Passenger* getOccupant() const;
         double getBasePrice() const;
         Flight* getFlight() const;
 
-        void setOccupant(const Passenger* occupant);
+        void setOccupant(Passenger* occupant);
         void setBasePrice(const double basePrice);
-        void setFlight(const Flight* flight);
+        void setFlight(Flight* flight);
         void setSeat(const char s);
         void setRow(const int r);
         char getSeat() const;

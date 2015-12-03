@@ -13,19 +13,19 @@ namespace Airport {
 
     }
 
-    Seat::Seat(const Flight* flight) : theFlight(flight), thePrice(0), theOccupant(nullptr) {
+    Seat::Seat(Flight* flight) : theFlight(flight), thePrice(0), theOccupant(nullptr) {
 
     }
 
-    Seat::Seat(const Passenger *occupant) : theOccupant(occupant), thePrice(0), theFlight(nullptr) {
+    Seat::Seat(Passenger *occupant) : theOccupant(occupant), thePrice(0), theFlight(nullptr) {
 
     }
 
-    Seat::Seat(const double basePrice, const Flight *flight) : thePrice(basePrice), theFlight(flight), theOccupant(nullptr) {
+    Seat::Seat(const double basePrice, Flight *flight) : thePrice(basePrice), theFlight(flight), theOccupant(nullptr) {
 
     }
 
-    Seat::Seat(const double basePrice,  const Passenger* occupant, const Flight* flight)
+    Seat::Seat(const double basePrice, Passenger* occupant, Flight* flight)
             : thePrice(basePrice), theFlight(flight), theOccupant(occupant) {
 
     }
@@ -46,11 +46,11 @@ namespace Airport {
         thePrice = basePrice;
     }
 
-    void Seat::setFlight(const Flight *flight) {
+    void Seat::setFlight(Flight *flight) {
         theFlight = flight;
     }
 
-    void Seat::setOccupant(const Passenger *occupant) {
+    void Seat::setOccupant(Passenger *occupant) {
         theOccupant = occupant;
     }
 
