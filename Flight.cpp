@@ -17,7 +17,7 @@
 
 namespace Airport {
     Flight::Flight(std::string typeOfPlane) : ID(-1), destination(""), departureTime(0), arrivalTime(0), thePlane(nullptr), planeType(typeOfPlane), basePrice(0) {
-        if (planeType != NULL && planeType != "") {
+        if (planeType.empty()) {
             int numSeats = TypePlane::getNumOfSeats(planeType);
             TypePlane::calcSeats(&numFirstClass, &numEconPlus, &numEcon, numSeats);
             numRows = TypePlane::getNumOfRows(planeType);
@@ -114,7 +114,7 @@ namespace Airport {
         arrivalTime = arrTime;
     }
 
-    void Flight::setPlane(const Plane *plane) {
+    void Flight::setPlane(Plane *plane) {
         thePlane = plane;
     }
 
@@ -165,7 +165,7 @@ namespace Airport {
 
     }//TODO extension to add later
 
-    void Flight::cancelBooking(const Passenger *passenger) {
+    void Flight::cancelBooking(Passenger *passenger) {
 
     }//TODO extension to add later
 

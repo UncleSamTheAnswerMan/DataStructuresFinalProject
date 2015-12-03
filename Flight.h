@@ -36,10 +36,10 @@ namespace Airport {
         void setDest(const string newDest);
         void setDepart(const time_t depTime);
         void setArrive(const time_t arrTime);
-        void setPlane(const Plane* plane);
+        void setPlane(Plane* plane);
         int bookFlight(Passenger* passenger, string chosenSeat);
         int bookFlight(Passenger* passenger, Seat* chosenSeat);
-        void cancelBooking(const Passenger* passenger);
+        void cancelBooking(Passenger* passenger);
         void cancelBooking(const int passID);
 
         void delayFlight(int timeMinutes);
