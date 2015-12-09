@@ -11,9 +11,10 @@ namespace Airport {
     class Flight;
     class EconPlus : public Seat {//EconPlusSeat inherits from SeatBaseType
     public:
-        virtual double calcPrice(int days, int miles) const;//virtual for subtype poly
+        double calcPrice(int days, int miles) const;//virtual for subtype poly
         EconPlus();
         EconPlus(double thePrice, Flight* theFlight);
+        void writeToFile(ostream& output);
     };
 }
 #endif //DATASTRUCTURESFINALPROJECT_ECONPLUS_H

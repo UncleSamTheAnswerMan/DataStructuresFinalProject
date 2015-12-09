@@ -42,7 +42,7 @@ namespace Airport {
                 }
             }
         }
-        if (found == false) {
+        if (!found) {
             Flights.push_back(f);
         }
     }

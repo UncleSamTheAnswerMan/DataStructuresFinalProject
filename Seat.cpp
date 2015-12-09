@@ -3,6 +3,8 @@
 //
 
 #include "Seat.h"
+#include <iostream>
+#include <iomanip>
 
 namespace Airport {
     Seat::Seat() : thePrice(0), theFlight(nullptr), theOccupant(nullptr) {
@@ -70,6 +72,9 @@ namespace Airport {
         return row;
     }
 
+    void Seat::writeToFile(ostream& output) {
+        output << 0 << " " << row << seat << " " << theOccupant->getId() << " ";
+    }
 
     double Seat::calcPrice(double days, double miles) const {
         return thePrice;

@@ -22,4 +22,8 @@ namespace Airport {
             return -1;
         }
     }
+
+    void EconSeat::writeToFile(ostream &output) {
+        output << 3 << " " << getRow() << getSeat() << getOccupant()->getId() << " ";
+    }
 }

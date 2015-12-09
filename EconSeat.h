@@ -13,8 +13,8 @@ namespace Airport {
     public:
         EconSeat();
         EconSeat(double thePrice, Flight* theFlight);
-        virtual double calcPrice(int days, int miles) const;//virtual for subtype runtime crap
-
+        double calcPrice(int days, int miles) const;//virtual for subtype runtime crap
+        void writeToFile(ostream& output);
     };
 }
 #endif //PROGRAM3_ECONSEAT_H

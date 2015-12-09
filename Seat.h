@@ -6,6 +6,8 @@
 #define DATASTRUCTURESFINALPROJECT_SEAT_H
 #include "Passenger.h"
 #include "Flight.h"
+#include <iostream>
+using namespace std;
 namespace Airport {
     class Flight;
     class Passenger;
@@ -29,8 +31,10 @@ namespace Airport {
         char getSeat() const;
         int getRow() const;
 
+        virtual void writeToFile(ostream& output);
 
-        double calcPrice(double days, double miles) const;
+
+        virtual double calcPrice(double days, double miles) const;
 
     private:
         Flight* theFlight;
