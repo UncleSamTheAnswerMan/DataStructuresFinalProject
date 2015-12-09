@@ -87,12 +87,29 @@ namespace Airport {
     void Airport::printPassengers() {
         for (int  i=0; i<passengerList.size(); i++)
         {
+            cout << passengerList[i]->getId() << " ";
             passengerList[i]->printPassenger();
         }
     }
     void Airport::printFleet() {
         fleet->showFleet();
     }
+    Passenger* Airport::getPassengerById(int i) {
+        for (int  i=0; i<passengerList.size(); i++)
+        {
+            if (passengerList[i]->getId() == i) {
+                return passengerList[i];
+            }
+            cout << "Invalid passenger ID. " << endl;
+        }
+    }
+    Passenger* Airport::getPassengerByIndex(int i) {
+        if (0 < i < passengerList.size()) {
+            return passengerList[i];
+        }
+        else cout << "The passenger does not exist at this index." << endl;
+    }
+
 
 
 }

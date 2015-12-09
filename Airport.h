@@ -31,6 +31,8 @@ namespace Airport {
         void printPassengers();
         void printFleet();
         Flight* getFlightByIndex(int i);
+        Passenger* getPassengerById(int i);
+        Passenger* getPassengerByIndex(int i);
 
 
     private:

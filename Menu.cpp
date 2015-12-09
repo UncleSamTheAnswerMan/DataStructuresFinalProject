@@ -100,7 +100,8 @@ namespace Airport {
     void Menu::createPassenger() {
         std::string fname;
         std::string lname;
-        int id = airport->getSizeOfPassList();
+        int lastPassIndex = airport->getSizeOfPassList();
+        int id = airport->getPassengerByIndex(lastPassIndex)->getId()+1;
         cout << "Please enter a first name: ";
         cin >> fname;
         cout << "Please enter a last name: ";
@@ -111,7 +112,12 @@ namespace Airport {
     }
     void Menu::deletePassenger() {
         //airport->deletePassengerFromList(p);
-        cout << "TODO" << endl;
+        int choicePassenger;
+        cout << "Please choose the ID next to the passenger you would like to delete: " << endl;
+        airport->printPassengers();
+        cin >> choicePassenger;
+        Passenger* passengerToDelete = airport->getPassengerById(choicePassenger);
+        airport->deletePassengerFromList(passengerToDelete);
     }
     void Menu::addFlight() {
         string planeType = userTypePlane();
