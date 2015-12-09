@@ -9,15 +9,19 @@
 #include "Fleet.h"
 #include "Passenger.h"
 #include "TypePlane.h"
+#include "time.h"
+
 namespace Airport {
     class Menu {
     public:
         Menu();
         Menu(Airport * airport);
+        time_t getTime();
         string userTypePlane() const;
         Plane* userPlane() const ;
         Passenger* userPassenger() const;
         int createPlaneId() const ;
+        int createFlightId() const ;
         double userBasePrice() const ;
         string userStartLocation()const ;
         string userEndLocation()const ;
