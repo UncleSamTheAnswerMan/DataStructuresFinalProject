@@ -93,19 +93,19 @@ namespace Airport {
     }
    int Menu::createPlaneId() const {
        int id;
-       if (airport->getFleet()->getFleetSize() == 0) {
+       if (airport->getFleet()->getFleetSize() < 1) {
            id = 1;
        }
        else {
            int lastPlaneIndex = airport->getFleet()->getFleetSize();
            Plane *idPlane = airport->getFleet()->getPlaneByIndex(lastPlaneIndex-1);
-           int id = idPlane->getId() + 1;
+           id = idPlane->getId() + 1;
        }
        return id;
    }
     int Menu::createFlightId() const {
         int id;
-        if (airport->getSizeOfFlightSchedule() == 0) {
+        if (airport->getSizeOfFlightSchedule() < 1) {
             id = 1;
         }
         else {
