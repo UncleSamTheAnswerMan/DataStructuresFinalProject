@@ -49,6 +49,7 @@ namespace Airport {
         void _initSeatList();
 
         void printFlight() const;
+        void writePlaneFile(ostream& flightFile);
 
     private:
         int ID;
