@@ -11,11 +11,11 @@ namespace Airport {
     class AisleSeat : public Seat {
     public:
         AisleSeat(Flight *f);
-        virtual double calcPrice(int days, int miles);
+        double calcPrice(int days, int miles);
         virtual Passenger* getOccupant() const;
         virtual int getRow() const;
         virtual char getSeat() const;
-
+        void writeToFile(ostream& output);
 
     };
 }

@@ -21,4 +21,8 @@ namespace Airport {
     char AisleSeat::getSeat() const {
         return ' ';
     }
+
+    void AisleSeat::writeToFile(ostream &output) {
+        output << 4 << " -1" << "0" << " " << 0 << " ";
+    }
 }
