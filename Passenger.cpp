@@ -47,4 +47,18 @@ namespace Airport {
         }
     }
 
+    void Passenger::writePassengerFile(ostream &output) {
+        output << "passenger\n";
+        output << firstName << "\n";
+        output << lastName << "\n";
+        output << ID << "\n";
+        output << "flights\n";
+        vector<Flight*>::iterator iter;
+        for (iter = Flights.begin(); iter != Flights.end(); iter++) {
+            output << (*iter)->getID() << "\n";
+        }
+        output << "endFlights\n";
+        output << "endPassenger\n";
+    }
+
 }

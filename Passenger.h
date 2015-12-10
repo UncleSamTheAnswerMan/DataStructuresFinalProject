@@ -29,6 +29,7 @@ namespace Airport {
         int getId();
         void setId(int newId);
         void printPassenger() const;
+        void writePassengerFile(ostream& output);
 
     };
 
