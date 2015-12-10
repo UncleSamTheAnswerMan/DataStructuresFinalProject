@@ -280,4 +280,36 @@ namespace Airport {
             SeatList.push_back(tempList);
         }
     }
+
+    void Flight::writePlaneFile(ostream &flightFile) {
+        flightFile << "flight\n" << ID << " " << numRows << numFirstClass << " " << numEconPlus << " " << numEcon;
+        flightFile << " " << rowsForFirst << " " << rowsForPlus << " " << rowsForEcon;
+        flightFile << " " << seatRowFirst << " " << seatRowPlus << " " << seatRowEcon;
+        flightFile << " " << aisleFirst << " " << aislePlus << " " << aisleEcon;
+        flightFile << "\n" << basePrice;
+        flightFile << "\n" << startingPoint;
+        flightFile << "\n" << destination;
+        flightFile << "\n" << planeType;
+        flightFile << "\n" << departureTime << " " << arrivalTime;
+        flightFile << "\n" << thePlane->getId() << "\n";
+        flightFile << "seats\n";
+        vector<vector<Seat*>>::iterator vectorIter;
+        for (vectorIter = SeatList.begin(); vectorIter != SeatList.end(); ++vectorIter){
+            vector<Seat*>::iterator seatIter;
+            for (seatIter = (*vectorIter).begin(); seatIter !=(*vectorIter).end(); seatIter++ ) {
+                (*seatIter)->writeToFile(flightFile);
+                flightFile << "\n";
+
+            }
+        }
+        flightFile << "endSeats\n";
+        flightFile << "passengers\n";
+        vector<Passenger*>::iterator passIter;
+        for (passIter = PassengerList.begin(); passIter != PassengerList.end(); ++passIter) {
+            flightFile << (*passIter)->getId() << "\n";
+        }
+        flightFile << "endPassenger\n";
+        flightFile << "endFlight\n";
+
+    }
 }
