@@ -2,26 +2,26 @@
 // Created by thisguy on 11/22/15.
 //
 
-#include "Airport.h"
+#include "Port.h"
 #include "Fleet.h"
 #include "Passenger.h"
 #include <vector>
 using namespace std;
 
 namespace Airport {
-    Airport::Airport() : fleet(nullptr) {
+    Port::Port() : fleet(new Fleet(this)) {
 
     }
-//    Airport::Airport(vector<Flight*>flightSched, Fleet* fleetList, vector<Passenger*> passList) : flightSchedule(flightSched), fleet(fleetList), passengerList(passList) {
+//    Port::Port(vector<Flight*>flightSched, Fleet* fleetList, vector<Passenger*> passList) : flightSchedule(flightSched), fleet(fleetList), passengerList(passList) {
 //
 //    }
-    void Airport::addFlightToSchedule(Flight *newFlight) {
+    void Port::addFlightToSchedule(Flight *newFlight) {
         flightSchedule.push_back(newFlight);
     }
-    void Airport::addPassengerToList(Passenger *newPass) {
+    void Port::addPassengerToList(Passenger *newPass) {
         passengerList.push_back(newPass);
     }
-    void Airport::deleteFlightFromSchedule(Flight *flightDelete) {
+    void Port::deleteFlightFromSchedule(Flight *flightDelete) {
         bool found  = false;
         if (!flightSchedule.empty())
         {
@@ -39,7 +39,7 @@ namespace Airport {
         }
 
     }
-    Flight* Airport::getFlightByIndex(int i) {
+    Flight* Port::getFlightByIndex(int i) {
         if (0 <= i < flightSchedule.size()) {
             return flightSchedule[i];
         }
@@ -48,13 +48,13 @@ namespace Airport {
         }
 
     }
-    int Airport::getSizeOfFlightSchedule() {
+    int Port::getSizeOfFlightSchedule() {
         return flightSchedule.size();
     }
-    int Airport::getSizeOfPassList() {
+    int Port::getSizeOfPassList() {
         return passengerList.size();
     }
-    void Airport::deletePassengerFromList(Passenger *passDelete) {
+    void Port::deletePassengerFromList(Passenger *passDelete) {
         bool found  = false;
         if (!passengerList.empty())
         {
@@ -71,39 +71,39 @@ namespace Airport {
             cout << "The passenger is not in the passenger list." << endl;
         }
     }
-    void Airport::setFleet(Fleet *newFleet) {
+    void Port::setFleet(Fleet *newFleet) {
         fleet = newFleet;
     }
-    Fleet* Airport::getFleet() const {
+    Fleet* Port::getFleet() const {
         return fleet;
     }
-    void Airport::printFlights() {
+    void Port::printFlights() {
         for (int  i=0; i<flightSchedule.size(); i++)
         {
             cout << i << " ";
             flightSchedule[i]->printFlight();
         }
     }
-    void Airport::printPassengers() {
+    void Port::printPassengers() {
         for (int  i=0; i<passengerList.size(); i++)
         {
             cout << passengerList[i]->getId() << " ";
             passengerList[i]->printPassenger();
         }
     }
-    void Airport::printFleet() {
+    void Port::printFleet() {
         fleet->showFleet();
     }
-    Passenger* Airport::getPassengerById(int i) {
+    Passenger* Port::getPassengerById(int id) {
         for (int  i=0; i<passengerList.size(); i++)
         {
-            if (passengerList[i]->getId() == i) {
+            if (passengerList[i]->getId() == id) {
                 return passengerList[i];
             }
-            cout << "Invalid passenger ID. " << endl;
         }
+        cout << "Invalid passenger ID. " << endl;
     }
-    Passenger* Airport::getPassengerByIndex(int i) {
+    Passenger* Port::getPassengerByIndex(int i) {
         if (0 < i < passengerList.size()) {
             return passengerList[i];
         }

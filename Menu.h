@@ -4,7 +4,7 @@
 
 #ifndef DATASTRUCTURESFINALPROJECT_MENU_H
 #define DATASTRUCTURESFINALPROJECT_MENU_H
-#include "Airport.h"
+#include "Port.h"
 #include "Flight.h"
 #include "Fleet.h"
 #include "Passenger.h"
@@ -15,13 +15,14 @@ namespace Airport {
     class Menu {
     public:
         Menu();
-        Menu(Airport * airport);
+        Menu(Port * airport);
         time_t getTime();
         string userTypePlane() const;
         Plane* userPlane() const ;
         Passenger* userPassenger() const;
         int createPlaneId() const ;
         int createFlightId() const ;
+        int createPassengerId() const;
         double userBasePrice() const ;
         string userStartLocation()const ;
         string userEndLocation()const ;
@@ -39,7 +40,7 @@ namespace Airport {
         void textGUI();
         int getOption();
     private:
-        Airport* airport;
+        Port* airport;
 
     };
 }

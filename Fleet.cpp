@@ -3,13 +3,13 @@
 //
 #include <iostream>
 #include "Fleet.h"
-#include "Airport.h"
+#include "Port.h"
 #include "Plane.h"
 
 using namespace std;
 namespace Airport {
     Fleet::Fleet() : homePort(nullptr) {}
-    Fleet::Fleet(Airport *port) : homePort(port) {}
+    Fleet::Fleet(Port *port) : homePort(port) {}
 
     void Fleet::addPlane(Plane* newPlane) {
         Planes.push_back(newPlane);
@@ -27,12 +27,20 @@ namespace Airport {
     void Fleet::showFleet () {
         for (int  i=0; i<Planes.size(); i++)
         {
-            cout << i << " ";
             Planes[i]->printPlane();
         }
     }
     Plane* Fleet::getPlaneByIndex(int i) {
         return Planes[i];
+    }
+    Plane* Fleet::getPlaneById(int id) {
+        for (int  i=0; i<Planes.size(); i++)
+        {
+            if (Planes[i]->getId() == id) {
+                return Planes[i];
+            }
+        }
+
     }
 
 }

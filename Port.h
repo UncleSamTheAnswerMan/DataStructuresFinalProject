@@ -15,9 +15,9 @@ namespace Airport {
     class Plane;
     class Passenger;
     class Fleet;
-    class Airport {
+    class Port {
     public:
-        Airport();
+        Port();
         //Airport(vector<Flight*> fsched, Fleet* flist, vector<Passenger*> plist);
         void addFlightToSchedule(Flight* newFlight);
         void addPassengerToList(Passenger* newPass);

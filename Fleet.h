@@ -8,25 +8,26 @@
 #include "Plane.h"
 #include "Passenger.h"
 #include "Flight.h"
-#include "Airport.h"
+#include "Port.h"
 #include <vector>
 namespace Airport {
     class Plane;
     class Passenger;
     class Flight;
-    class Airport;
+    class Port;
     class Fleet {
     private:
         vector<Plane*> Planes;
-        Airport *homePort;
+        Port *homePort;
     public:
         Fleet();
-        Fleet(Airport* a);
+        Fleet(Port* a);
         void addPlane(Plane* newPlane);
         void deletePlane(Plane* oldPlane);
         int getFleetSize() const;
         void showFleet();
         Plane* getPlaneByIndex(int i);
+        Plane* getPlaneById(int id);
     };
 
 

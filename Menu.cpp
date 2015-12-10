@@ -6,18 +6,20 @@
 #include <string>
 #include "time.h"
 #include "TypePlane.h"
+#include "Plane.h"
 using namespace std;
 namespace Airport {
+
     Menu::Menu() : airport(nullptr){
 
     }
-    Menu::Menu(Airport* a) : airport(a) {
+    Menu::Menu(Port* a) : airport(a) {
 
     }
     string Menu::userTypePlane() const {
         int typeOption;
         string planeType;
-        cout << "What kind of plane would you like to add?" << endl;
+        cout << "What kind of plane are you interested in1?" << endl;
         cout << "Select the number next to the model." << endl;
         TypePlane::printTypes();
         cout << "Press 0 to quit." << endl;
@@ -78,7 +80,7 @@ namespace Airport {
         cout << "Please select a plane by the number next to it: " << endl;
         airport->getFleet()->showFleet();
         cin >> choice;
-        Plane* planeToChoose = airport->getFleet()->getPlaneByIndex(choice);
+        Plane* planeToChoose = airport->getFleet()->getPlaneById(choice);
         return planeToChoose;
     }
     Passenger* Menu::userPassenger() const {
@@ -90,15 +92,36 @@ namespace Airport {
         return passenger;
     }
    int Menu::createPlaneId() const {
-       int lastPlaneIndex = airport->getFleet()->getFleetSize();
-       Plane * idPlane = airport->getFleet()->getPlaneByIndex(lastPlaneIndex);
-       int id = idPlane->getId() + 1;
+       int id;
+       if (airport->getFleet()->getFleetSize() == 0) {
+           id = 1;
+       }
+       else {
+           int lastPlaneIndex = airport->getFleet()->getFleetSize();
+           Plane *idPlane = airport->getFleet()->getPlaneByIndex(lastPlaneIndex-1);
+           int id = idPlane->getId() + 1;
+       }
        return id;
    }
     int Menu::createFlightId() const {
-        int lastFlightIndex = airport->getSizeOfFlightSchedule();
-        Flight* lastFlight = airport->getFlightByIndex(lastFlightIndex);
-        int id = lastFlight->getID() + 1;
+        int id;
+        if (airport->getSizeOfFlightSchedule() == 0) {
+            id = 1;
+        }
+        else {
+            int lastFlightIndex = airport->getSizeOfFlightSchedule();
+            Flight *lastFlight = airport->getFlightByIndex(lastFlightIndex-1);
+            id = lastFlight->getID() + 1;
+        }
+        return id;
+    }
+    int Menu::createPassengerId() const {
+        int id;
+        int lastPassIndex = airport->getSizeOfPassList();
+        if (lastPassIndex < 1) {
+            id = 1;
+        }
+        else { id=airport->getPassengerByIndex(lastPassIndex-1)->getId()+1; }
         return id;
     }
     double Menu::userBasePrice()const {
@@ -134,10 +157,14 @@ namespace Airport {
         int planeId = createPlaneId();
         Plane* p = new Plane(planeType, ourFleet, planeId);
         airport->getFleet()->addPlane(p);
+        cout << "You successfully added: " ;
+        p->printPlane();
+        cout << "to the fleet." << endl;
     }
     void Menu::deletePlaneMenu() const {
         Plane* planeToChoose = userPlane();
         airport->getFleet()->deletePlane(planeToChoose);
+        cout << "You have successfully deleted the plane." << endl;
     }
     void Menu::bookFlightMenu() const {
 
@@ -145,8 +172,7 @@ namespace Airport {
     void Menu::createPassenger() {
         std::string fname;
         std::string lname;
-        int lastPassIndex = airport->getSizeOfPassList();
-        int id = airport->getPassengerByIndex(lastPassIndex)->getId()+1;
+        int id = createPassengerId();
         cout << "Please enter a first name: ";
         cin >> fname;
         cout << "Please enter a last name: ";
@@ -157,6 +183,7 @@ namespace Airport {
     void Menu::deletePassenger() {
         Passenger* passengerToDelete = userPassenger();
         airport->deletePassengerFromList(passengerToDelete);
+        cout << "You have successfully deleted the passenger." << endl;
     }
     void Menu::addFlight() {
         string planeType = userTypePlane();
@@ -196,7 +223,7 @@ namespace Airport {
     int Menu::getOption() {
         int chosenOption;
         cout << "Select the number next to the option you are interested in: " << endl;
-        cout << "0 to quit" << endl;
+        cout << "Q Quit" << endl;
         cout << "1 Add a plane to the fleet" << endl;
         cout << "2 Delete a plane from the fleet" << endl;
         cout << "3 Book a flight" << endl;
