@@ -3,6 +3,9 @@
 //
 #include "Seat.h"
 #include "AisleSeat.h"
+#include <iostream>
+
+using std::ostream
 
 namespace Airport {
     AisleSeat::AisleSeat(Flight* f) : Seat::Seat(0,f) {

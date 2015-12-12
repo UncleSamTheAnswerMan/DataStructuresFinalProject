@@ -6,6 +6,7 @@
 #define DATASTRUCTURESFINALPROJECT_FLIGHT_H
 
 #include <time.h>
+#include <iostream>
 #include <vector>
 #include "Passenger.h"
 #include "Plane.h"

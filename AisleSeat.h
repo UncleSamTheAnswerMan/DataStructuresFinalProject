@@ -6,6 +6,9 @@
 #define DATASTRUCTURESFINALPROJECT_AISLESEAT_H
 
 #include "Seat.h"
+#include <iostream>
+
+using std::ostream
 
 namespace Airport {
     class AisleSeat : public Seat {

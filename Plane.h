@@ -4,12 +4,13 @@
 
 #ifndef DATASTRUCTURESFINALPROJECT_PLANE_H
 #define DATASTRUCTURESFINALPROJECT_PLANE_H
-#include <iostream>
 #include "Fleet.h"
 #include "Flight.h"
 #include "Seat.h"
 #include "TypePlane.h"
 #include "Itinerary.h"
+#include <iostream>
+using std::ostream;
 
 namespace Airport {
     class Fleet;

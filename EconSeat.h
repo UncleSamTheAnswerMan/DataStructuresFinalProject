@@ -6,6 +6,9 @@
 #define DATASTRUCTURESFINALPROJECT_ECONSEAT_H
 #include "Seat.h"
 #include "Flight.h"
+#include <iostream>
+
+using std::ostream
 
 namespace Airport {
     class Flight;

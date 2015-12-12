@@ -9,6 +9,7 @@
 #include "Flight.h"
 #include <vector>
 using std::vector;
+using std::ostream;
 namespace Airport {
 
     class Itinerary {

@@ -73,9 +73,11 @@ namespace Airport {
     }
 
     void Itinerary::writeItinerary(ostream &planeOutput) {
+        planeOutput << "itinerary" << endl;
         vector<Flight*>::iterator iter;
         for (iter = flightList.begin(); iter != flightList.end(); ++iter) {
             planeOutput << (*iter)->getID() << "\n";
         }
+        planeOutput << "endItinerary" << endl;
     }
 }

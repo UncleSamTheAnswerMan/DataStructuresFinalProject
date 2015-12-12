@@ -5,6 +5,9 @@
 #include "FirstClass.h"
 #include "Seat.h"
 #include "Flight.h"
+#include <iostream>
+
+using std::ostream
 
 namespace Airport {
     FirstClass::FirstClass() { }

@@ -3,8 +3,10 @@
 //
 
 #include "Seat.h"
-#include <iostream>
 #include <iomanip>
+#include <iostream>
+
+using std::ostream
 
 namespace Airport {
     Seat::Seat() : thePrice(0), theFlight(nullptr), theOccupant(nullptr) {
