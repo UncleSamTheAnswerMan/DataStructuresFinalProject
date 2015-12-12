@@ -16,7 +16,8 @@
 #include <sstream>
 
 namespace Airport {
-    Flight::Flight(std::string typeOfPlane) : ID(-1), destination(""), departureTime(0), arrivalTime(0), thePlane(nullptr), planeType(typeOfPlane), basePrice(0) {
+    Flight::Flight(std::string typeOfPlane) : ID(-1),startingPoint(""), destination(""), departureTime(0), arrivalTime(0), thePlane(nullptr), planeType(typeOfPlane), basePrice(0) {
+
         if (planeType.empty()) {
             int numSeats = TypePlane::getNumOfSeats(planeType);
             TypePlane::calcSeats(&numFirstClass, &numEconPlus, &numEcon, numSeats);

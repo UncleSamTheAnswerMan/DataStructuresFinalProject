@@ -11,7 +11,7 @@
 #include "Itinerary.h"
 using namespace std;
 namespace Airport {
-    Plane::Plane() : planeType(NULL), associatedFleet(nullptr), ID(-1), itinerary(), noOfSeats(-1), firstClass(-1), economyPlus(-1), economy(-1) {}
+    Plane::Plane() : planeType(""), associatedFleet(nullptr), ID(-1), itinerary(), noOfSeats(-1), firstClass(-1), economyPlus(-1), economy(-1) {}
     Plane::Plane(string thisType, Fleet* thisFleet, int thisId) : planeType(thisType), associatedFleet(thisFleet), ID(thisId), itinerary(){
         if (planeType.empty()) {
             noOfSeats = TypePlane::getNumOfSeats(planeType);
@@ -78,6 +78,14 @@ namespace Airport {
     }
     void Plane::_updateSeatTypes() {
         TypePlane::calcSeats(&firstClass, &economyPlus, &economy, noOfSeats);
+    }
+    void Plane::writePlane(ostream &planeFile) {
+        planeFile << "plane" << endl;
+        planeFile << ID << endl;
+        planeFile << planeType << endl;
+        planeFile << noOfSeats << " " << firstClass << " " << economyPlus << " " << economy << endl;
+        planeFile << numOfRows << endl;
+        itinerary->writeItinerary(planeFile);
     }
 }
 

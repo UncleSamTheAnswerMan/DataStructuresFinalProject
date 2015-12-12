@@ -48,6 +48,7 @@ namespace Airport {
         void deleteFlightFromItinerary(Flight* flightToDelete);
         void _updateSeatTypes();
         void printPlane();
+        void writePlane(ostream& planeFile);
 
 
     };
