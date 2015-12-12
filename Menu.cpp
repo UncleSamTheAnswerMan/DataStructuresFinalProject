@@ -46,7 +46,6 @@ namespace Airport {
     }
     time_t Menu::getTime() {
         time_t rawtime;
-        struct tm * timeinfo;
         int year, month ,day,hour,minute,second;
         const char * weekday[] = { "Sunday", "Monday",
                                    "Tuesday", "Wednesday",
@@ -63,21 +62,22 @@ namespace Airport {
 
         /* get current timeinfo and modify it to the user's choice */
 
-        timeinfo->tm_year = year - 1900;
-        timeinfo->tm_mon = month - 1;
-        timeinfo->tm_mday = day;
-        timeinfo->tm_hour = hour;
-        timeinfo->tm_min = minute;
-        timeinfo->tm_sec = second;
+        struct tm timeinfo = {second, minute, hour, day, month, year};
+//        timeinfo.tm_year = year - 1900;
+//        timeinfo.tm_mon = month - 1;
+//        timeinfo.tm_mday = day;
+//        timeinfo.tm_hour = hour;
+//        timeinfo.tm_min = minute;
+//        timeinfo.tm_sec = second;
 
         /* call mktime: timeinfo->tm_wday will be set */
-        time_t thetime = mktime ( timeinfo );
+        time_t thetime = mktime ( &timeinfo );
 
         return thetime;
     }
     Plane* Menu::userPlane() const {
-        int choice;
         cout << "Please select a plane by the number next to it: " << endl;
+        int choice;
         airport->getFleet()->showFleet();
         cin >> choice;
         Plane* planeToChoose = airport->getFleet()->getPlaneById(choice);
@@ -186,18 +186,43 @@ namespace Airport {
         cout << "You have successfully deleted the passenger." << endl;
     }
     void Menu::addFlight() {
-        string planeType = userTypePlane();
-        const int flightId = createFlightId();
-        Plane* thePlane = userPlane();
-        double thePrice = userBasePrice();
-        string start = userStartLocation();
-        string end = userEndLocation();
-        cout << "Please enter a departure time: " << endl;
-        time_t depTime = getTime();
-        cout << "Please enter an arrival time: " << endl;
-        time_t arriveTime = getTime();
-        Flight* newFlight = new Flight(flightId,thePlane,depTime,arriveTime,thePrice,start,end);
-        airport->addFlightToSchedule(newFlight);
+        int firstChoice;
+        cout << "Select the number corresponding to the option you are interested in : " << endl;
+        cout << "1 Select plane by type" << endl;
+        cout << "2 Select specific plane by ID" << endl;
+        cin >> firstChoice;
+        if (firstChoice == 1) {
+            string planeType = userTypePlane();
+            const int flightId = createFlightId();
+            double thePrice = userBasePrice();
+            string start = userStartLocation();
+            string end = userEndLocation();
+            cout << "Please enter a departure time: " << endl;
+            time_t depTime = getTime();
+            cout << "Please enter an arrival time: " << endl;
+            time_t arriveTime = getTime();
+            Flight* newFlight = new Flight(flightId,planeType,depTime,arriveTime,thePrice,start,end);
+            airport->addFlightToSchedule(newFlight);
+        }
+        else if (firstChoice == 2) {
+            Plane* thePlane = userPlane();
+            const int flightId = createFlightId();
+            double thePrice = userBasePrice();
+            string start = userStartLocation();
+            string end = userEndLocation();
+            cout << "Please enter a departure time: " << endl;
+            time_t depTime = getTime();
+            cout << "Please enter an arrival time: " << endl;
+            time_t arriveTime = getTime();
+            Flight* newFlight = new Flight(flightId,thePlane,depTime,arriveTime,thePrice,start,end);
+            airport->addFlightToSchedule(newFlight);
+            cout << "the end of add flight" << endl;
+        }
+        else {
+            cout << "You did not pick a valid option" << endl;
+            addFlight();
+        }
+
 
     }
     void Menu::deleteFlight() {

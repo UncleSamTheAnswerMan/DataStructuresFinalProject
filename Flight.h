@@ -20,6 +20,7 @@ namespace Airport {
     public:
         Flight(string typeOfPlane);
         Flight(int newID, Plane* plane, time_t departTime, time_t arriveTime, double price, string end, string start);
+        Flight(int newID, std::string typeOfPlane, time_t departTime, time_t arriveTime, double price, string end, string start);
         int getID() const;
         string getStartingPoint() const;
         string getDestination() const;

@@ -14,10 +14,22 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+using namespace std;
 
 namespace Airport {
     Flight::Flight(std::string typeOfPlane) : ID(-1),startingPoint(""), destination(""), departureTime(0), arrivalTime(0), thePlane(nullptr), planeType(typeOfPlane), basePrice(0) {
 
+        if (planeType.empty()) {
+            int numSeats = TypePlane::getNumOfSeats(planeType);
+            TypePlane::calcSeats(&numFirstClass, &numEconPlus, &numEcon, numSeats);
+            numRows = TypePlane::getNumOfRows(planeType);
+            _initSeatList();
+
+        }
+    }
+    Flight::Flight(int newID, std::string typeOfPlane, time_t departTime, time_t arriveTime, double price, string end, string start)
+            : ID(newID), thePlane(nullptr), departureTime(departTime), arrivalTime(arriveTime), basePrice(price),
+              destination(end), startingPoint(start) {
         if (planeType.empty()) {
             int numSeats = TypePlane::getNumOfSeats(planeType);
             TypePlane::calcSeats(&numFirstClass, &numEconPlus, &numEcon, numSeats);
