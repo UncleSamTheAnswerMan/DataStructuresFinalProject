@@ -8,7 +8,7 @@
 #include "Seat.h"
 #include <iostream>
 
-using std::ostream
+using std::ostream;
 
 namespace Airport {
     class AisleSeat : public Seat {
