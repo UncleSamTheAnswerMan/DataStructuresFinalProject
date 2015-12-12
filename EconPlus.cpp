@@ -7,7 +7,7 @@
 #include "Flight.h"
 #include <iostream>
 
-using std::ostream
+using std::ostream;
 
 namespace Airport {
     EconPlus::EconPlus() : Seat::Seat() {//empty constructor

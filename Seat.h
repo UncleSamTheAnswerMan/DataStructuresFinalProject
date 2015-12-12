@@ -7,6 +7,7 @@
 #include "Passenger.h"
 #include "Flight.h"
 #include <iostream>
+#include <ostream>
 using namespace std;
 namespace Airport {
     class Flight;

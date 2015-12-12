@@ -14,6 +14,7 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <ostream>
 using namespace std;
 
 namespace Airport {

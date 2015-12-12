@@ -3,6 +3,7 @@
 //
 #include <iostream>
 #include "Passenger.h"
+#include <ostream>
 using namespace std;
 namespace Airport {
     Passenger::Passenger() : firstName(""), lastName(""), ID(-1) {}

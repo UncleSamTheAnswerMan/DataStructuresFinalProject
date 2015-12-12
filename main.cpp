@@ -10,7 +10,6 @@ using namespace std;
 int main() {
     string thisString = "hi";
     cout << thisString;
-//
     Port* a = new Port();
     Menu* m = new Menu(a);
     int flightId = m->createFlightId();

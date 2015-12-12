@@ -3,6 +3,7 @@
 //
 
 #include "Itinerary.h"
+#include <ostream>
 using std::vector;
 namespace Airport {
     Itinerary::Itinerary() : flightList() { }

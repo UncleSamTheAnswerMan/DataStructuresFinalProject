@@ -8,7 +8,7 @@
 #include "Flight.h"
 #include <iostream>
 
-using std::ostream
+using std::ostream;
 
 namespace Airport {
     class Flight;

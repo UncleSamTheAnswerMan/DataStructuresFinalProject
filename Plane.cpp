@@ -9,6 +9,7 @@
 #include "Seat.h"
 #include "TypePlane.h"
 #include "Itinerary.h"
+#include <ostream>
 using namespace std;
 namespace Airport {
     Plane::Plane() : planeType(""), associatedFleet(nullptr), ID(-1), itinerary(), noOfSeats(-1), firstClass(-1), economyPlus(-1), economy(-1) {}

@@ -8,6 +8,7 @@
 
 #include "Flight.h"
 #include <vector>
+#include <ostream>
 using std::vector;
 using std::ostream;
 namespace Airport {
