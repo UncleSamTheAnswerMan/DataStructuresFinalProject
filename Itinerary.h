@@ -20,6 +20,7 @@ namespace Airport {
         Flight* findFlightByID(const int flightID);
         void showAllFlights();
         void showNextFlight();
+        void writeItinerary(ostream& planeOutput);
         //TODO add sort method
     private:
         vector<Flight*> flightList;
