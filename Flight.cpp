@@ -30,7 +30,7 @@ namespace Airport {
         }
     }
     Flight::Flight(int newID, std::string typeOfPlane, time_t departTime, time_t arriveTime, double price, string end, string start)
-            : ID(newID), thePlane(nullptr), departureTime(departTime), arrivalTime(arriveTime), basePrice(price),
+            : ID(newID), planeType(typeOfPlane), departureTime(departTime), arrivalTime(arriveTime), basePrice(price),
               destination(end), startingPoint(start) {
         if (!planeType.empty()) {
             int numSeats = TypePlane::getNumOfSeats(planeType);

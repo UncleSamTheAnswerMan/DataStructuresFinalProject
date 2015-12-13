@@ -125,7 +125,10 @@ namespace Airport {
         int choice;
         airport->getFleet()->showFleet();
         cin >> choice;
+        cout << "you chose " << choice << endl;
         Plane* planeToChoose = airport->getFleet()->getPlaneById(choice);
+        planeToChoose->printPlane();
+        cout << "plane printed but not gotten" << endl;
         return planeToChoose;
     }
     Passenger* Menu::userPassenger() const {
@@ -297,6 +300,7 @@ namespace Airport {
         airport->printFlights();
     }
     void Menu::changePlaneFlight() {
+
         if (airport->getSizeOfFlightSchedule() == 0) {
             cout << "There are no flights in the schedule to alter." << endl;
             return;
@@ -304,9 +308,14 @@ namespace Airport {
             Flight *flightToChange = userFlight();
 
             if (flightToChange->getPlane()== nullptr) {
+                cout << "The current type of plane is " << flightToChange->getTypeOfPlane();
                 cout << "Choose the plane you would like to associate with this flight. Planes must be of the same type." << endl;
                 Plane* planeToChoose = userPlane();
-                if (!flightToChange->getTypeOfPlane().compare(planeToChoose->getType())) {
+                cout << "got plane" << endl;
+//                cout << planeToChoose->getType() << endl;
+                string whatever = flightToChange->getTypeOfPlane();
+                cout << whatever << endl;
+                if (!(flightToChange->getTypeOfPlane().compare(planeToChoose->getType()))) {
                     flightToChange->setPlane(planeToChoose);
                     planeToChoose->addFlightToItinerary(flightToChange);
                 }
