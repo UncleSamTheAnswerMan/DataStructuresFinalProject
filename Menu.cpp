@@ -45,21 +45,29 @@ namespace Airport {
                     return seatStream.str();
                 } else {
                     cout << "The seat letter you entered is not valid." << endl;
+                    userSeat(flight);
                 }
             } else if (rowNumber >= flight->getSeatsRowFirst() && rowNumber < flight->getRowsPlus()) {
                 if (seatLetter >= 'A' && seatNum < flight->getSeatsRowPlus()) {
                     return seatStream.str();
                 } else {
                     cout << "The seat letter you entered is not valid." << endl;
+                    userSeat(flight);
+
                 }
             } else if (rowNumber >= flight->getRowsPlus() && rowNumber < flight->getRowsEcon()) {
             if (seatLetter >= 'A' && seatNum < flight->getSeatsRowsEcon()) {
                 return seatStream.str();
             } else {
                 cout << "The seat letter you entered is not valid." << endl;
+                userSeat(flight);
             }
         }
         }
+    }
+    void Menu::cancelPassengerBooking() const {
+        Passenger* canceler = userPassenger();
+        canceler->cancelFlight();
     }
     string Menu::userTypePlane() const {
         int typeOption;
@@ -299,6 +307,11 @@ namespace Airport {
     void Menu::showFlights() {
         airport->printFlights();
     }
+    void Menu::printPassengersOnAFlight() const {
+        cout << "Please choose the flight to view passengers." <<endl;
+        Flight* flightToShow = userFlight();
+        flightToShow->showPassengers();
+    }
     void Menu::changePlaneFlight() {
 
         if (airport->getSizeOfFlightSchedule() == 0) {
@@ -355,7 +368,9 @@ namespace Airport {
         cout << "7 Delete a flight" << endl;
         cout << "8 Show flights" << endl;
         cout << "9 Change a flight's plane" << endl;
-        cout << "10 Save and Quit" << endl;
+        cout << "10 View all passengers on a flight" << endl;
+        cout << "11 Cancel a passenger's flight" << endl;
+        cout << "12 Save and Quit" << endl;
         cin >> chosenOption;
         return chosenOption;
     }
@@ -385,6 +400,10 @@ namespace Airport {
             } else if (option == 9) {
                 changePlaneFlight();
             } else if (option == 10) {
+                printPassengersOnAFlight();
+            } else if (option==11) {
+                cancelPassengerBooking();
+            } else if (option==12) {
                 outputToFile();
                 break;
             } else {

@@ -93,7 +93,6 @@ namespace Airport {
     void Port::printFlights() {
         for (int  i=0; i<flightSchedule.size(); i++)
         {
-            cout << i << " ";
             flightSchedule[i]->printFlight();
         }
     }

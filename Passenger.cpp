@@ -47,7 +47,30 @@ namespace Airport {
             Flights.push_back(f);
         }
     }
+    void Passenger::cancelFlight() {
+        if (Flights.size() < 1) {
+            cout << "This passenger doesn't have any flights scheduled." << endl;
+        } else {
+            int delId;
+            cout << "Select the flight you would like to cancel by its ID: " << endl;
+            printPassengerFlights();
+            cin >> delId;
+            for (int i = 0; i < Flights.size(); i++) {
+                if (delId == Flights[i]->getID()) {
+                    Flights.erase(Flights.begin() + i);
+                    cout << "Flight successfully canceled." << endl;
+                } else {
+                    cout << "That flight ID is not valid." << endl;
+                }
+            }
+        }
 
+    }
+    void Passenger::printPassengerFlights() const {
+        for (int i=0; i<Flights.size();i++) {
+            Flights[i]->printFlight();
+        }
+    }
     void Passenger::writePassengerFile(ostream &output) {
         output << "passenger\n";
         output << firstName << "\n";
