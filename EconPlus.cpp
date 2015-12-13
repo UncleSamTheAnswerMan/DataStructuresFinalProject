@@ -39,6 +39,6 @@ namespace Airport {
     }
 
     void EconPlus::writeToFile(ostream &output) {
-        output << 2 << " " << getRow() << getSeat() << " " << getOccupant()->getId() << " ";
+        output << 2 << " " << getRow() << getSeat() << " " << getOccupant()->getId() << endl;
     }
 }

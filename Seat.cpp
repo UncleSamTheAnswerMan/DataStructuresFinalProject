@@ -75,7 +75,7 @@ namespace Airport {
     }
 
     void Seat::writeToFile(ostream& output) {
-        output << 0 << " " << row << seat << " " << theOccupant->getId() << " ";
+        output << 0 << " " << row << seat << " " << theOccupant->getId() << endl;
     }
 
     double Seat::calcPrice(double days, double miles) const {

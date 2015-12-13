@@ -26,6 +26,6 @@ namespace Airport {
     }
 
     void AisleSeat::writeToFile(ostream &output) {
-        output << 4 << " -1" << "0" << " " << 0 << " ";
+        output << 4 << " -1" << "0" << " " << 0 << endl;
     }
 }
