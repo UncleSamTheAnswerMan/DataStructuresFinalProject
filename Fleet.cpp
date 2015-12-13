@@ -43,4 +43,10 @@ namespace Airport {
 
     }
 
+    void Fleet::writePlanes(ostream &planeFile) {
+        vector<Plane*>::iterator iter;
+        for (iter = Planes.begin(); iter != Planes.end(); ++iter) {
+            (*iter)->writePlane(planeFile);
+        }
+    }
 }

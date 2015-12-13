@@ -10,6 +10,9 @@
 #include "Flight.h"
 #include "Port.h"
 #include <vector>
+
+using std::ostream;
+
 namespace Airport {
     class Plane;
     class Passenger;
@@ -28,6 +31,7 @@ namespace Airport {
         void showFleet();
         Plane* getPlaneByIndex(int i);
         Plane* getPlaneById(int id);
+        void writePlanes(ostream &planeFile);
     };
 
 
