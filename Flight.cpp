@@ -335,24 +335,23 @@ namespace Airport {
     }
 
     void Flight::writePlaneFile(ostream &flightFile) {
-        flightFile << "flight\n" << ID << " " << numRows << numFirstClass << " " << numEconPlus << " " << numEcon;
-        flightFile << " " << rowsForFirst << " " << rowsForPlus << " " << rowsForEcon;
-        flightFile << " " << seatRowFirst << " " << seatRowPlus << " " << seatRowEcon;
-        flightFile << " " << aisleFirst << " " << aislePlus << " " << aisleEcon;
-        flightFile << "\n" << basePrice;
-        flightFile << "\n" << startingPoint;
-        flightFile << "\n" << destination;
-        flightFile << "\n" << planeType;
-        flightFile << "\n" << departureTime << " " << arrivalTime;
-        flightFile << "\n" << thePlane->getId() << "\n";
-        flightFile << "seats\n";
+        flightFile << "i am writing to the flightFile" << endl;
+        flightFile << "flight\n" << ID << " " << numRows << " " << numFirstClass << " " << numEconPlus << " " << numEcon << endl;
+        flightFile << " " << rowsForFirst << " " << rowsForPlus << " " << rowsForEcon << endl;
+        flightFile << " " << seatRowFirst << " " << seatRowPlus << " " << seatRowEcon << endl;
+        flightFile << " " << aisleFirst << " " << aislePlus << " " << aisleEcon << endl;
+        flightFile << basePrice << endl;
+        flightFile << startingPoint << endl;
+        flightFile << destination << endl;
+        flightFile << planeType << endl;
+        flightFile << departureTime << " " << arrivalTime << endl;
+        flightFile << thePlane->getId() << endl;
+        flightFile << "seats" << endl;
         vector<vector<Seat*>>::iterator vectorIter;
         for (vectorIter = SeatList.begin(); vectorIter != SeatList.end(); ++vectorIter){
             vector<Seat*>::iterator seatIter;
             for (seatIter = (*vectorIter).begin(); seatIter !=(*vectorIter).end(); seatIter++ ) {
                 (*seatIter)->writeToFile(flightFile);
-                flightFile << "\n";
-
             }
         }
         flightFile << "endSeats\n";

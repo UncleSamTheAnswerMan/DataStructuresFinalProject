@@ -6,7 +6,7 @@
 #include <ostream>
 using std::vector;
 namespace Airport {
-    Itinerary::Itinerary() : flightList() { }
+    Itinerary::Itinerary() : flightList(){ }
 
     int Itinerary::addFlight(Flight *flightToAdd) { //TODO add error checking to prevent paradoxes in the time-space continuum
         vector<Flight*>::iterator iter;
@@ -76,8 +76,11 @@ namespace Airport {
     void Itinerary::writeItinerary(ostream &planeOutput) {
         planeOutput << "itinerary" << endl;
         vector<Flight*>::iterator iter;
-        for (iter = flightList.begin(); iter != flightList.end(); ++iter) {
-            planeOutput << (*iter)->getID() << "\n";
+        if (!flightList.empty()) {
+            planeOutput << flightList[0]->getID() << endl;
+            for (iter = flightList.begin(); iter != flightList.end(); ++iter) {
+                planeOutput << (*iter)->getID() << "\n";
+            }
         }
         planeOutput << "endItinerary" << endl;
     }
