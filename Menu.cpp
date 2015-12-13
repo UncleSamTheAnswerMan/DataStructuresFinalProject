@@ -268,7 +268,7 @@ namespace Airport {
             time_t depTime = getTime();
             cout << "Please enter an arrival time: " << endl;
             time_t arriveTime = getTime();
-            Flight* newFlight = new Flight(flightId,planeType,depTime,arriveTime,thePrice,start,end);
+            Flight* newFlight = new Flight(flightId,planeType,depTime,arriveTime,thePrice,end,start);
             airport->addFlightToSchedule(newFlight);
         }
         else if (firstChoice == 2) {
@@ -281,7 +281,7 @@ namespace Airport {
             time_t depTime = getTime();
             cout << "Please enter an arrival time: " << endl;
             time_t arriveTime = getTime();
-            Flight* newFlight = new Flight(flightId,thePlane,depTime,arriveTime,thePrice,start,end);
+            Flight* newFlight = new Flight(flightId,thePlane,depTime,arriveTime,thePrice,end, start);
             airport->addFlightToSchedule(newFlight);
             thePlane->addFlightToItinerary(newFlight);
         }
