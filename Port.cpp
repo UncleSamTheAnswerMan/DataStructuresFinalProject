@@ -6,6 +6,8 @@
 #include "Fleet.h"
 #include "Passenger.h"
 #include <vector>
+#include <fstream>
+
 using namespace std;
 
 namespace Airport {
@@ -110,6 +112,28 @@ namespace Airport {
         else cout << "The passenger does not exist at this index." << endl;
     }
 
+    void Port::writeStuffToFile() {
+        ofstream flightFile;
+        flightFile.open("flightStuff.txt", "w");
+        vector<Flight*>::iterator flightIter;
+        for (flightIter = flightSchedule.begin(); flightIter != flightSchedule.end(); ++flightIter){
+            (*flightIter)->writePlaneFile(flightFile);
+        }
+        flightFile.close();
 
+        ofstream passFile;
+        passFile.open("passengerStuff.txt", "w");
+        vector<Passenger*>::iterator passIter;
+        for (passIter = passengerList.begin(); passIter != passengerList.end(); ++passIter) {
+            (*passIter)->writePassengerFile(passFile);
+        }
+        passFile.close();
+
+        ofstream planeFile;
+        planeFile.open("planeStuff.txt", "w");
+        fleet->writePlanes(planeFile);
+        planeFile.close();
+
+    }
 
 }

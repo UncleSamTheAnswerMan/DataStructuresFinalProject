@@ -33,6 +33,7 @@ namespace Airport {
         Flight* getFlightByIndex(int i);
         Passenger* getPassengerById(int i);
         Passenger* getPassengerByIndex(int i);
+        void writeStuffToFile();
 
 
     private:
