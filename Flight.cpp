@@ -19,10 +19,11 @@ using namespace std;
 
 namespace Airport {
     Flight::Flight(std::string typeOfPlane) : ID(-1),startingPoint(""), destination(""), departureTime(0), arrivalTime(0), thePlane(nullptr), planeType(typeOfPlane), basePrice(0) {
-
-        if (planeType.empty()) {
+        if (!planeType.empty()) {
             int numSeats = TypePlane::getNumOfSeats(planeType);
-            TypePlane::calcSeats(&numFirstClass, &numEconPlus, &numEcon, numSeats);
+            numFirstClass = TypePlane::calcFirst(numSeats);
+            numEconPlus = TypePlane::calcEconPlus(numSeats);
+            numEcon = TypePlane::calcEcon(numFirstClass, numEconPlus, numSeats);
             numRows = TypePlane::getNumOfRows(planeType);
             _initSeatList();
 
@@ -31,9 +32,12 @@ namespace Airport {
     Flight::Flight(int newID, std::string typeOfPlane, time_t departTime, time_t arriveTime, double price, string end, string start)
             : ID(newID), thePlane(nullptr), departureTime(departTime), arrivalTime(arriveTime), basePrice(price),
               destination(end), startingPoint(start) {
-        if (planeType.empty()) {
+        if (!planeType.empty()) {
             int numSeats = TypePlane::getNumOfSeats(planeType);
-            TypePlane::calcSeats(&numFirstClass, &numEconPlus, &numEcon, numSeats);
+            numFirstClass = TypePlane::calcFirst(numSeats);
+            numEconPlus = TypePlane::calcEconPlus(numSeats);
+            numEcon = TypePlane::calcEcon(numFirstClass, numEconPlus, numSeats);
+            numRows = TypePlane::getNumOfRows(planeType);
             numRows = TypePlane::getNumOfRows(planeType);
             _initSeatList();
 
@@ -54,6 +58,30 @@ namespace Airport {
 
     int Flight::getID() const {
         return ID;
+    }
+
+    int Flight::getRowsEcon() const {
+        return rowsForEcon;
+    }
+
+    int Flight::getRowsFirst() const {
+        return rowsForFirst;
+    }
+
+    int Flight::getRowsPlus() const {
+        return rowsForPlus;
+    }
+
+    int Flight::getSeatsRowFirst() const {
+        return seatRowFirst;
+    }
+
+    int Flight::getSeatsRowPlus() const {
+        return seatRowPlus;
+    }
+
+    int Flight::getSeatsRowsEcon() const {
+        return seatRowEcon;
     }
 
     string Flight::getStartingPoint() const {
@@ -239,6 +267,9 @@ namespace Airport {
         rowsForFirst = floor((double)rowsForEcon/2);
         rowsForPlus = ceil((double)rowsForEcon/2);
 
+        cout << "does it get here " << endl;
+        cout << "numFirstClass: " << numFirstClass << endl;
+        cout << "rowsForFirst: " << rowsForFirst << endl;
         seatRowFirst = numFirstClass/rowsForFirst;
         seatRowPlus = numEconPlus/rowsForPlus;
         seatRowEcon = numEcon/rowsForEcon;
@@ -251,7 +282,6 @@ namespace Airport {
         numFirstClass++;
         numEconPlus++;
         numEcon++;
-
         for (int i = 0; i < rowsForFirst; i++) {
             vector<Seat*> tempList;
             for (int j = 0; j < seatRowFirst; j++) {
@@ -293,6 +323,7 @@ namespace Airport {
             }
             SeatList.push_back(tempList);
         }
+        cout << "don't think it gets here" << endl;
     }
 
     void Flight::writePlaneFile(ostream &flightFile) {

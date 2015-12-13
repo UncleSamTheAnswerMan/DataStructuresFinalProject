@@ -32,6 +32,13 @@ namespace Airport {
         Passenger* getPassengerForSeat(string seat)const;
         Passenger* getPassengerForSeat(Seat* seat)const;
         Seat* getSeatForPassenger(int passID)const;
+        int getRowsFirst()const;
+        int getRowsPlus()const;
+        int getRowsEcon()const;
+        int getSeatsRowFirst() const;
+        int getSeatsRowPlus() const;
+        int getSeatsRowsEcon() const;
+
 
         void setID(const int newID);
         void setStartingPoint(const string newStart);
