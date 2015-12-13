@@ -23,34 +23,37 @@ namespace Airport {
         int classSeat;
         flight->showSeats();
         stringstream seatStream;
-        int rowNumber;
-        char seatLetter;
+        int rowNumber = -1;
+        char seatLetter = ' ';
         string tempString;
         cout << "Select a seat Example: 1A for row 1 and seat A: " << endl;
         cin >> tempString;
         seatStream.str(tempString);
         seatStream >> rowNumber;
         seatStream >> seatLetter;
+        seatLetter = toupper(seatLetter);
+        int seatNum;
+        seatNum = static_cast<int>(seatLetter - 'A');
 
-        if (rowNumber == NULL || seatLetter == NULL) {
+        if (rowNumber == -1 || seatLetter == ' ') {
             cout << "You did not enter a seat. Please try again." << endl;
             userSeat(flight);
         } else {
             rowNumber--;
             if (rowNumber >= 0 && rowNumber < flight->getRowsFirst()) {
-                if (seatLetter >= 'A' && seatLetter < flight->getSeatsRowFirst()) {
+                if (seatLetter >= 'A' && seatNum < flight->getSeatsRowFirst()) {
                     return seatStream.str();
                 } else {
                     cout << "The seat letter you entered is not valid." << endl;
                 }
             } else if (rowNumber >= flight->getSeatsRowFirst() && rowNumber < flight->getRowsPlus()) {
-                if (seatLetter >= 'A' && seatLetter < flight->getSeatsRowPlus()) {
+                if (seatLetter >= 'A' && seatNum < flight->getSeatsRowPlus()) {
                     return seatStream.str();
                 } else {
                     cout << "The seat letter you entered is not valid." << endl;
                 }
             } else if (rowNumber >= flight->getRowsPlus() && rowNumber < flight->getRowsEcon()) {
-            if (seatLetter >= 'A' && seatLetter < flight->getSeatsRowsEcon()) {
+            if (seatLetter >= 'A' && seatNum < flight->getSeatsRowsEcon()) {
                 return seatStream.str();
             } else {
                 cout << "The seat letter you entered is not valid." << endl;
@@ -187,10 +190,10 @@ namespace Airport {
     }
     Flight* Menu::userFlight() const {
         int choiceFlight;
-        cout << "Please select the number corresponding to the flight: " << endl;
+        cout << "Please select the ID corresponding to the flight: " << endl;
         airport->printFlights();
         cin >> choiceFlight;
-        Flight* chosenFlight = airport->getFlightByIndex(choiceFlight);
+        Flight* chosenFlight = airport->getFlightById(choiceFlight);
         return chosenFlight;
     }
     void Menu::addPlaneMenu() const {

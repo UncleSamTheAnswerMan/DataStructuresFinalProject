@@ -50,6 +50,17 @@ namespace Airport {
         }
 
     }
+    Flight* Port::getFlightById(int id) {
+        for (int i = 0; i < getSizeOfFlightSchedule(); i++ ) {
+            if (flightSchedule[i]->getID() == id) {
+                return flightSchedule[i];
+            }
+            else {
+                cout << "That ID is not in the flight schedule." << endl;
+            }
+        }
+
+    }
     int Port::getSizeOfFlightSchedule() {
         return flightSchedule.size();
     }
