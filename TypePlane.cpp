@@ -20,18 +20,18 @@ namespace Airport {
         cout << "6 L1011" << endl;
     }
     int TypePlane::getNumOfSeats(std::string planeType) {
-        cout << planeType << endl;
-        if (planeType.compare("A380")) {
+        cout << planeType << "*********************" << endl;
+        if (!planeType.compare("A380")) {
             return 900;
-        } else if (planeType.compare("A330")) {
+        } else if (!planeType.compare("A330")) {
             return 250;
-        } else if (planeType.compare("C130")) {
+        } else if (!planeType.compare("C130")) {
             return 90;
-        } else if (planeType.compare("Boeing747")) {
+        } else if (!planeType.compare("Boeing747")) {
             return 330;
-        } else if (planeType.compare("Boeing737")) {
+        } else if (!planeType.compare("Boeing737")) {
             return 160;
-        } else if (planeType.compare("L1011")) {
+        } else if (!planeType.compare("L1011")) {
             return 190;
         } else {
             return -1;
@@ -39,17 +39,17 @@ namespace Airport {
     }
 
     int TypePlane::getNumOfRows(std::string planeType) {
-        if (planeType.compare("A380")) {
+        if (!planeType.compare("A380")) {
             return 900/10;
-        } else if (planeType.compare("A330")) {
+        } else if (!planeType.compare("A330")) {
             return 256/8;
-        } else if (planeType.compare("C130")) {
+        } else if (!planeType.compare("C130")) {
             return 90/5;
-        } else if (planeType.compare("Boeing747")) {
+        } else if (!planeType.compare("Boeing747")) {
             return 336/8;
-        } else if (planeType.compare("Boeing737")) {
+        } else if (!planeType.compare("Boeing737")) {
             return 168/6;
-        } else if (planeType.compare("L1011")) {
+        } else if (!planeType.compare("L1011")) {
             return 192/6;
         } else {
             return -1;
