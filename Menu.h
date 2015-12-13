@@ -27,6 +27,7 @@ namespace Airport {
         string userStartLocation()const ;
         string userEndLocation()const ;
         Flight* userFlight()const ;
+        string userSeat(Flight* f) const;
         void addPlaneMenu() const;
         void deletePlaneMenu() const;
         void bookFlightMenu() const;

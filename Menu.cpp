@@ -7,6 +7,7 @@
 #include "time.h"
 #include "TypePlane.h"
 #include "Plane.h"
+#include <sstream>
 using namespace std;
 namespace Airport {
 
@@ -15,6 +16,47 @@ namespace Airport {
     }
     Menu::Menu(Port* a) : airport(a) {
 
+    }
+    string Menu::userSeat(Flight* flight) const {
+        //TODO rownumber update
+        string chosenSeat;
+        int classSeat;
+        flight->showSeats();
+        stringstream seatStream;
+        int rowNumber;
+        char seatLetter;
+        string tempString;
+        cout << "Select a seat Example: 1A for row 1 and seat A: " << endl;
+        cin >> tempString;
+        seatStream.str(tempString);
+        seatStream >> rowNumber;
+        seatStream >> seatLetter;
+
+        if (rowNumber == NULL || seatLetter == NULL) {
+            cout << "You did not enter a seat. Please try again." << endl;
+            userSeat(flight);
+        } else {
+            rowNumber--;
+            if (rowNumber >= 0 && rowNumber < flight->getRowsFirst()) {
+                if (seatLetter >= 'A' && seatLetter < flight->getSeatsRowFirst()) {
+                    return seatStream.str();
+                } else {
+                    cout << "The seat letter you entered is not valid." << endl;
+                }
+            } else if (rowNumber >= flight->getSeatsRowFirst() && rowNumber < flight->getRowsPlus()) {
+                if (seatLetter >= 'A' && seatLetter < flight->getSeatsRowPlus()) {
+                    return seatStream.str();
+                } else {
+                    cout << "The seat letter you entered is not valid." << endl;
+                }
+            } else if (rowNumber >= flight->getRowsPlus() && rowNumber < flight->getRowsEcon()) {
+            if (seatLetter >= 'A' && seatLetter < flight->getSeatsRowsEcon()) {
+                return seatStream.str();
+            } else {
+                cout << "The seat letter you entered is not valid." << endl;
+            }
+        }
+        }
     }
     string Menu::userTypePlane() const {
         int typeOption;
@@ -62,7 +104,7 @@ namespace Airport {
 
         /* get current timeinfo and modify it to the user's choice */
 
-        struct tm timeinfo = {second, minute, hour, day, month, year};
+        struct tm timeinfo = {second, minute, hour, day, (month-1), (year-1900)};
 //        timeinfo.tm_year = year - 1900;
 //        timeinfo.tm_mon = month - 1;
 //        timeinfo.tm_mday = day;
@@ -167,6 +209,11 @@ namespace Airport {
         cout << "You have successfully deleted the plane." << endl;
     }
     void Menu::bookFlightMenu() const {
+        cout << "Please choose a flight to book: " << endl;
+        Flight* chosenFlight = userFlight();
+        Passenger* chosenPassenger = userPassenger();
+        string seat = userSeat(chosenFlight);
+        chosenFlight->bookFlight(chosenPassenger,seat);
 
     }
     void Menu::createPassenger() {
