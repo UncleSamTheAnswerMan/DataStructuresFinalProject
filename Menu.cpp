@@ -217,12 +217,16 @@ namespace Airport {
         }
     }
     void Menu::bookFlightMenu() const {
-        cout << "Please choose a flight to book: " << endl;
-        Flight* chosenFlight = userFlight();
-        Passenger* chosenPassenger = userPassenger();
-        string seat = userSeat(chosenFlight);
-        chosenFlight->bookFlight(chosenPassenger,seat);
-
+        if (airport->getSizeOfFlightSchedule() == 0) {
+            cout << "There are no flights available at this time." << endl;
+            return;
+        } else {
+            cout << "Please choose a flight to book: " << endl;
+            Flight *chosenFlight = userFlight();
+            Passenger *chosenPassenger = userPassenger();
+            string seat = userSeat(chosenFlight);
+            chosenFlight->bookFlight(chosenPassenger, seat);
+        }
     }
     void Menu::createPassenger() {
         std::string fname;
@@ -236,9 +240,14 @@ namespace Airport {
         airport->addPassengerToList(passenger);
     }
     void Menu::deletePassenger() {
-        Passenger* passengerToDelete = userPassenger();
-        airport->deletePassengerFromList(passengerToDelete);
-        cout << "You have successfully deleted the passenger." << endl;
+        if (airport->getSizeOfPassList() == 0) {
+            cout << "There are no passengers in the passenger list." << endl;
+            return;
+        } else {
+            Passenger *passengerToDelete = userPassenger();
+            airport->deletePassengerFromList(passengerToDelete);
+            cout << "You have successfully deleted the passenger." << endl;
+        }
     }
     void Menu::addFlight() {
         int firstChoice;
@@ -271,6 +280,7 @@ namespace Airport {
             time_t arriveTime = getTime();
             Flight* newFlight = new Flight(flightId,thePlane,depTime,arriveTime,thePrice,start,end);
             airport->addFlightToSchedule(newFlight);
+            thePlane->addFlightToItinerary(newFlight);
         }
         else {
             cout << "You did not pick a valid option" << endl;
@@ -287,13 +297,37 @@ namespace Airport {
         airport->printFlights();
     }
     void Menu::changePlaneFlight() {
-        Flight* flightToChange = userFlight();
-        string planeType = userTypePlane();
-        if (flightToChange->getPlane()->getType().compare(planeType)) {
-            flightToChange->getPlane()->setType(planeType);
-        }
-        else {
-            cout << "That plane type is not compatible with this flight. Please choose another plane." << endl;
+        if (airport->getSizeOfFlightSchedule() == 0) {
+            cout << "There are no flights in the schedule to alter." << endl;
+            return;
+        } else {
+            Flight *flightToChange = userFlight();
+
+            if (flightToChange->getPlane()== nullptr) {
+                cout << "Choose the plane you would like to associate with this flight. Planes must be of the same type." << endl;
+                Plane* planeToChoose = userPlane();
+                if (!flightToChange->getTypeOfPlane().compare(planeToChoose->getType())) {
+                    flightToChange->setPlane(planeToChoose);
+                    planeToChoose->addFlightToItinerary(flightToChange);
+                }
+                else {
+                    cout << "Those plane types are not compatible." << endl;
+                    return;
+                }
+            } else {
+                cout << "Choose the plane you would like to associate with this flight. Planes must be of the same type." << endl;
+                Plane* planeToChoose = userPlane();
+                string planeType = planeToChoose->getType();
+                if (!flightToChange->getPlane()->getType().compare(planeType)) {
+                    flightToChange->getPlane()->deleteFlightFromItinerary(flightToChange);
+                    flightToChange->setPlane(planeToChoose);
+                    planeToChoose->addFlightToItinerary(flightToChange);
+                }
+                else {
+                    cout << "That plane type is not compatible with this flight. Please choose another plane." << endl;
+                    return;
+                }
+            }
         }
     }
     void Menu::outputToFile() {
@@ -311,7 +345,7 @@ namespace Airport {
         cout << "6 Add a flight" << endl;
         cout << "7 Delete a flight" << endl;
         cout << "8 Show flights" << endl;
-        cout << "9 Change a plane's flight" << endl;
+        cout << "9 Change a flight's plane" << endl;
         cout << "10 Save and Quit" << endl;
         cin >> chosenOption;
         return chosenOption;

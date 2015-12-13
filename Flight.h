@@ -24,6 +24,7 @@ namespace Airport {
         Flight(int newID, string typeOfPlane, time_t departTime, time_t arriveTime, double price, string end, string start);
         int getID() const;
         string getStartingPoint() const;
+        string getTypeOfPlane() const;
         string getDestination() const;
         time_t getDepart() const;
         time_t getArrival() const;

@@ -178,7 +178,9 @@ namespace Airport {
         cout << theSeat->getRow() << theSeat->getSeat() << endl;
         return bookFlight(passenger, theSeat);
     }
-
+    string Flight::getTypeOfPlane() const {
+        return planeType;
+    }
     int Flight::bookFlight(Passenger *passenger, Seat *chosenSeat) {
         bool foundPass = false;
         for (int i = 0; i < PassengerList.size(); i++) {
