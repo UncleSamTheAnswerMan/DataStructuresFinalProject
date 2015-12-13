@@ -91,6 +91,7 @@ namespace Airport {
         planeFile << noOfSeats << " " << firstClass << " " << economyPlus << " " << economy << endl;
         planeFile << numOfRows << endl;
         itinerary->writeItinerary(planeFile);
+        planeFile << "endPlane" << endl;
     }
 }
 
