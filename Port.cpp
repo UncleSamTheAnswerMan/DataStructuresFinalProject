@@ -114,7 +114,7 @@ namespace Airport {
 
     void Port::writeStuffToFile() {
         ofstream flightFile;
-        flightFile.open("flightStuff.txt", "w");
+        flightFile.open("flightStuff.txt");
         vector<Flight*>::iterator flightIter;
         for (flightIter = flightSchedule.begin(); flightIter != flightSchedule.end(); ++flightIter){
             (*flightIter)->writePlaneFile(flightFile);
@@ -122,7 +122,7 @@ namespace Airport {
         flightFile.close();
 
         ofstream passFile;
-        passFile.open("passengerStuff.txt", "w");
+        passFile.open("passengerStuff.txt");
         vector<Passenger*>::iterator passIter;
         for (passIter = passengerList.begin(); passIter != passengerList.end(); ++passIter) {
             (*passIter)->writePassengerFile(passFile);
@@ -130,7 +130,7 @@ namespace Airport {
         passFile.close();
 
         ofstream planeFile;
-        planeFile.open("planeStuff.txt", "w");
+        planeFile.open("planeStuff.txt");
         fleet->writePlanes(planeFile);
         planeFile.close();
 
