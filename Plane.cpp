@@ -14,18 +14,20 @@ using namespace std;
 namespace Airport {
     Plane::Plane() : planeType(""), associatedFleet(nullptr), ID(-1), itinerary(), noOfSeats(-1), firstClass(-1), economyPlus(-1), economy(-1) {}
     Plane::Plane(string thisType, Fleet* thisFleet, int thisId) : planeType(thisType), associatedFleet(thisFleet), ID(thisId), itinerary(){
-        if (planeType.empty()) {
+        if (!planeType.empty()) {
             noOfSeats = TypePlane::getNumOfSeats(planeType);
-            TypePlane::calcSeats(&firstClass, &economyPlus, &economy, noOfSeats);
+            _updateSeatTypes();
             numOfRows = TypePlane::getNumOfRows(planeType);
         }
     }
 
     void Plane::setType(const string typePlane) {
+
         planeType = typePlane;
-        if (planeType.empty()) {
-            TypePlane::getNumOfSeats(planeType);
-            TypePlane::calcSeats(&firstClass, &economyPlus, &economy, noOfSeats);
+        if (!planeType.empty()) {
+            noOfSeats = TypePlane::getNumOfSeats(planeType);
+            _updateSeatTypes();
+            numOfRows = TypePlane::getNumOfRows(planeType);
         }
     }
     string Plane::getType() const {
@@ -78,7 +80,9 @@ namespace Airport {
         }
     }
     void Plane::_updateSeatTypes() {
-        TypePlane::calcSeats(&firstClass, &economyPlus, &economy, noOfSeats);
+        firstClass = TypePlane::calcFirst(noOfSeats);
+        economyPlus = TypePlane::calcEconPlus(noOfSeats);
+        economy = TypePlane::calcEcon(firstClass, economyPlus, noOfSeats);
     }
     void Plane::writePlane(ostream &planeFile) {
         planeFile << "plane" << endl;

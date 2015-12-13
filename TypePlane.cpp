@@ -3,6 +3,7 @@
 //
 
 #include "TypePlane.h"
+#include <iostream>
 using namespace std;
 
 namespace Airport {
@@ -19,6 +20,7 @@ namespace Airport {
         cout << "6 L1011" << endl;
     }
     int TypePlane::getNumOfSeats(std::string planeType) {
+        cout << planeType << endl;
         if (planeType.compare("A380")) {
             return 900;
         } else if (planeType.compare("A330")) {
@@ -58,11 +60,19 @@ namespace Airport {
 //        return typeOfPlane;
 //    }
 
-    void TypePlane::calcSeats(int *firstClass, int *econPlus, int *econ, int total) {
-        *firstClass = total * .1;
-        *econPlus = total * .2;
-        *econ = total - *firstClass - *econPlus;
+    int TypePlane::calcEcon(int firstClass, int econPlus, int total) {
+        return (total - firstClass - econPlus);
     }
+
+    int TypePlane::calcFirst(int total) {
+        return (int)(total *.1);
+    }
+
+    int TypePlane::calcEconPlus(int total) {
+        return (int)(total *.2);
+    }
+
+
 
 
 }
