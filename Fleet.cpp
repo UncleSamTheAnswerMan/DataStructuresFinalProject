@@ -15,10 +15,12 @@ namespace Airport {
         Planes.push_back(newPlane);
     }
     void Fleet::deletePlane(Plane* oldPlane) {
-        for (vector<Plane*>::iterator it=begin(Planes); it != end(Planes); ++it)
-            if ((*it)->getId() == oldPlane->getId()) {
-                Planes.erase(it);
+
+        for (int i=0;i<Planes.size();i++) {
+            if (Planes[i]->getId() == oldPlane->getId()) {
+                Planes.erase(Planes.begin()+i);
             }
+        }
 
     }
     int Fleet::getFleetSize() const {

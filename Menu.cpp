@@ -64,7 +64,7 @@ namespace Airport {
     string Menu::userTypePlane() const {
         int typeOption;
         string planeType;
-        cout << "What kind of plane are you interested in1?" << endl;
+        cout << "What kind of plane are you interested in?" << endl;
         cout << "Select the number next to the model." << endl;
         TypePlane::printTypes();
         cout << "Press 0 to quit." << endl;
@@ -207,9 +207,14 @@ namespace Airport {
         cout << "to the fleet." << endl;
     }
     void Menu::deletePlaneMenu() const {
-        Plane* planeToChoose = userPlane();
-        airport->getFleet()->deletePlane(planeToChoose);
-        cout << "You have successfully deleted the plane." << endl;
+        if (airport->getFleet()->getFleetSize()==0) {
+            cout << "There are no planes in the fleet to delete." << endl;
+            return;
+        } else {
+            Plane *planeToChoose = userPlane();
+            airport->getFleet()->deletePlane(planeToChoose);
+            cout << "You have successfully deleted the plane." << endl;
+        }
     }
     void Menu::bookFlightMenu() const {
         cout << "Please choose a flight to book: " << endl;
@@ -266,7 +271,6 @@ namespace Airport {
             time_t arriveTime = getTime();
             Flight* newFlight = new Flight(flightId,thePlane,depTime,arriveTime,thePrice,start,end);
             airport->addFlightToSchedule(newFlight);
-            cout << "the end of add flight" << endl;
         }
         else {
             cout << "You did not pick a valid option" << endl;
@@ -293,7 +297,7 @@ namespace Airport {
         }
     }
     void Menu::outputToFile() {
-
+        airport->writeStuffToFile();
     }
     int Menu::getOption() {
         int chosenOption;
@@ -338,7 +342,8 @@ namespace Airport {
             } else if (option == 9) {
                 changePlaneFlight();
             } else if (option == 10) {
-                keepGoing = false;
+                outputToFile();
+                break;
             } else {
                 cout << "You did not pick a valid option." << endl;
                 textGUI();
@@ -348,6 +353,5 @@ namespace Airport {
             cin >> answer;
             keepGoing = (answer[0] == 'y' || answer[0] == 'Y');
         }
-        outputToFile();
     }
 }

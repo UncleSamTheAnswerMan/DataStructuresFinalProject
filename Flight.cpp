@@ -253,7 +253,8 @@ namespace Airport {
     void Flight::printFlight() const {
         cout << setw(40) << left << "Flight ID: " << right << ID << endl;
         cout << setw(40) << left << "Plane Type: " << right << planeType << endl;
-        cout << setw(40) << left << "Plane ID: " << right << thePlane->getId() << endl;
+        //TODO make another method that prints a plane ID too
+        //cout << setw(40) << left << "Plane ID: " << right << thePlane->getId() << endl;
         cout << setw(40) << left << "Starting Seat Price: " << right << basePrice << endl;
         cout << setw(40) << left << "Total Number of Seats: " << right << (numFirstClass + numEcon + numEconPlus) << endl;
         cout << setw(40) << left << "->First Class Seats: " << right << numFirstClass-1 << endl;
@@ -264,27 +265,20 @@ namespace Airport {
         cout << setw(40) << left << "Flight Destination: " << right << destination << endl;
         cout << setw(40) << left << "Departure Time: " << right << ctime(&departureTime) << endl;
         cout << setw(40) << left << "Arrival Time: " << right << ctime(&arrivalTime) << endl;
-
-
     }
-
     void Flight::_initSeatList() {
-
         rowsForEcon = numRows/2;
         rowsForFirst = floor((double)rowsForEcon/2);
         rowsForPlus = ceil((double)rowsForEcon/2);
-
         cout << "does it get here " << endl;
         cout << "numFirstClass: " << numFirstClass << endl;
         cout << "rowsForFirst: " << rowsForFirst << endl;
         seatRowFirst = numFirstClass/rowsForFirst;
         seatRowPlus = numEconPlus/rowsForPlus;
         seatRowEcon = numEcon/rowsForEcon;
-
         aisleFirst = floor((double)seatRowFirst/2);
         aislePlus = floor((double)seatRowPlus/2);
         aisleEcon = floor((double)seatRowEcon/2);
-
         //need to increment numSeats to add in aisle
         numFirstClass++;
         numEconPlus++;
@@ -336,7 +330,6 @@ namespace Airport {
             }
             SeatList.push_back(tempList);
         }
-        cout << "don't think it gets here" << endl;
     }
 
     void Flight::writePlaneFile(ostream &flightFile) {
