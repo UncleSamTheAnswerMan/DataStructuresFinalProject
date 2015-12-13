@@ -169,11 +169,13 @@ namespace Airport {
         seatStream >> seatChar;
         seatChar = toupper(seatChar);
         seatNum = static_cast<int>(seatChar - 'A');
+        cout << "rowNum: " << rowNum << "\nSeatChar: " << seatChar << "\nSeatNum: " << seatNum << endl;
+        rowNum--;
         Seat *theSeat;
         //if (rowNum < numRows && seatNum < SeatList[rowNum].size()) {
-            theSeat = SeatList[rowNum][seatNum];
+            theSeat = SeatList[(rowNum)][seatNum];
         //}
-
+        cout << theSeat->getRow() << theSeat->getSeat() << endl;
         return bookFlight(passenger, theSeat);
     }
 
@@ -220,20 +222,20 @@ namespace Airport {
         int i = 0;
         for (vectorIter = SeatList.begin(); vectorIter != SeatList.end(); ++vectorIter) {
             cout <<setw(11) << left << "Row " << (i+1) << ": ";
-            cout << setw(seatRowEcon * 3 + 2) << left;
+            //cout << setw(seatRowEcon * 3 + 2) << left;
             int j = 0;
             vector<Seat*>::iterator seatIter;
             for (seatIter = vectorIter->begin(); seatIter != vectorIter->end(); ++seatIter) {
                 if ((*seatIter)->getOccupant() == nullptr) {
                     int row = (*seatIter)->getRow();
                     char seat = (*seatIter)->getSeat();
-                    if (row >= 0) {
+                //    if (row >= 0) {
                         cout << seat << " ";
-                    } else {
-                        cout << "  ";
-                    }
+                //    } else {
+                //        cout << "  ";
+                //    }
                 } else {
-                    cout << "X";
+                    cout << "X ";
                 }
             }
             cout << endl;
@@ -296,6 +298,8 @@ namespace Airport {
                 } else {
                     temp = new FirstClass(basePrice, this);
                 }
+                temp->setRow(i);
+                temp->setSeat((static_cast<char>(j + 'A')));
                 tempList.push_back(temp);
             }
             SeatList.push_back(tempList);
@@ -310,6 +314,8 @@ namespace Airport {
                 } else {
                     temp = new EconPlus(basePrice, this);
                 }
+                temp->setRow(i);
+                temp->setSeat((static_cast<char>(j + 'A')));
                 tempList.push_back(temp);
             }
             SeatList.push_back(tempList);
@@ -324,6 +330,8 @@ namespace Airport {
                 } else {
                     temp = new EconSeat(basePrice, this);
                 }
+                temp->setRow(i);
+                temp->setSeat((static_cast<char>(j + 'A')));
                 tempList.push_back(temp);
             }
             SeatList.push_back(tempList);
