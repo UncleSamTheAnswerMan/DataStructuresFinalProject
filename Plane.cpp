@@ -12,8 +12,11 @@
 #include <ostream>
 using namespace std;
 namespace Airport {
-    Plane::Plane() : planeType(""), associatedFleet(nullptr), ID(-1), itinerary(), noOfSeats(-1), firstClass(-1), economyPlus(-1), economy(-1) {}
-    Plane::Plane(string thisType, Fleet* thisFleet, int thisId) : planeType(thisType), associatedFleet(thisFleet), ID(thisId), itinerary(){
+    Plane::Plane() : planeType(""), associatedFleet(nullptr), ID(-1), noOfSeats(-1), firstClass(-1), economyPlus(-1), economy(-1) {
+        itinerary = new Itinerary();
+    }
+    Plane::Plane(string thisType, Fleet* thisFleet, int thisId) : planeType(thisType), associatedFleet(thisFleet), ID(thisId){
+        itinerary = new Itinerary();
         if (!planeType.empty()) {
             noOfSeats = TypePlane::getNumOfSeats(planeType);
             _updateSeatTypes();
