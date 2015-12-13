@@ -170,9 +170,9 @@ namespace Airport {
         seatChar = toupper(seatChar);
         seatNum = static_cast<int>(seatChar - 'A');
         Seat *theSeat;
-        if (rowNum < numRows && seatNum < SeatList[rowNum].size()) {
+        //if (rowNum < numRows && seatNum < SeatList[rowNum].size()) {
             theSeat = SeatList[rowNum][seatNum];
-        }
+        //}
 
         return bookFlight(passenger, theSeat);
     }
@@ -216,13 +216,17 @@ namespace Airport {
     }
 
     void Flight::showSeats() {
-        for (int i = 0; i < SeatList.size(); i++) {
+        vector<vector<Seat*>>::iterator vectorIter;
+        int i = 0;
+        for (vectorIter = SeatList.begin(); vectorIter != SeatList.end(); ++vectorIter) {
             cout <<setw(11) << left << "Row " << (i+1) << ": ";
             cout << setw(seatRowEcon * 3 + 2) << left;
-            for (int j = 0; j < SeatList[i].size(); j++) {
-                if (SeatList[i][j]->getOccupant() == nullptr) {
-                    int row = SeatList[i][j]->getRow();
-                    char seat = SeatList[i][j]->getSeat();
+            int j = 0;
+            vector<Seat*>::iterator seatIter;
+            for (seatIter = vectorIter->begin(); seatIter != vectorIter->end(); ++seatIter) {
+                if ((*seatIter)->getOccupant() == nullptr) {
+                    int row = (*seatIter)->getRow();
+                    char seat = (*seatIter)->getSeat();
                     if (row >= 0) {
                         cout << seat << " ";
                     } else {
@@ -233,6 +237,7 @@ namespace Airport {
                 }
             }
             cout << endl;
+            i++;
         }
     }
 
