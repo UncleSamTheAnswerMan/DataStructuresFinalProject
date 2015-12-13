@@ -42,7 +42,7 @@ namespace Airport {
 
     }
     Flight* Port::getFlightByIndex(int i) {
-        if (0 <= i < flightSchedule.size()) {
+        if (0 < i < flightSchedule.size()) {
             return flightSchedule[i];
         }
         else {
