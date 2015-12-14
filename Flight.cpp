@@ -222,23 +222,34 @@ namespace Airport {
     void Flight::showSeats() {
         vector<vector<Seat*>>::iterator vectorIter;
         int i = 0;
+        int firstSpacer = 0;
+        int plusSpacer = 0;
+        for (int k = 0; k < (seatRowEcon - seatRowPlus); k++) {
+            plusSpacer++;
+        }
+        for (int k=0; k<(seatRowEcon - seatRowFirst); k++) {
+            firstSpacer++;
+        }
         for (vectorIter = SeatList.begin(); vectorIter != SeatList.end(); ++vectorIter) {
-            cout <<setw(11) << left << "Row " << (i+1) << ": ";
-            //cout << setw(seatRowEcon * 3 + 2) << left;
             int j = 0;
             vector<Seat*>::iterator seatIter;
+            if (i == 0) {
+                cout << "First Class" << endl;
+            } else if (i == rowsForFirst) {
+                cout << "Econonmy Plus" << endl;
+            } else if (i == (rowsForFirst + rowsForPlus)) {
+                cout << "Economy" << endl;
+            }
+            cout << left << "Row "  << setw(4) << right<< (i+1) << ": ";
+            //cout << setw(seatRowEcon * 3 + 2) << left;
             for (seatIter = vectorIter->begin(); seatIter != vectorIter->end(); ++seatIter) {
-                if ((*seatIter)->getOccupant() == nullptr) {
-                    int row = (*seatIter)->getRow();
-                    char seat = (*seatIter)->getSeat();
-                //    if (row >= 0) {
-                        cout << seat << " ";
-                //    } else {
-                //        cout << "  ";
-                //    }
-                } else {
-                    cout << "X ";
+                (*seatIter)->printSeat();
+                if (i < rowsForFirst && j==aisleFirst) {
+                    cout << setw(firstSpacer);
+                } else if (i < (rowsForFirst + rowsForPlus) && j==aislePlus){
+                    cout << setw(plusSpacer);
                 }
+                j++;
             }
             cout << endl;
             i++;
@@ -259,9 +270,10 @@ namespace Airport {
         //cout << setw(40) << left << "Plane ID: " << right << thePlane->getId() << endl;
         cout << setw(40) << left << "Starting Seat Price: " << right << basePrice << endl;
         cout << setw(40) << left << "Total Number of Seats: " << right << (numFirstClass + numEcon + numEconPlus) << endl;
-        cout << setw(40) << left << "->First Class Seats: " << right << numFirstClass-1 << endl;
-        cout << setw(40) << left << "->Economy Plus Seats: " << right << numEconPlus-1 << endl;
-        cout << setw(40) << left << "->Economy Seats: " << right << numEcon-1 << endl;
+        cout << setw(40) << left << "->First Class Seats: " << right << numFirstClass << endl;
+        cout << setw(40) << left << "->Economy Plus Seats: " << right << numEconPlus << endl;
+
+        cout << setw(40) << left << "->Economy Seats: " << right << numEcon << endl;
 
         cout << setw(40) << left << "Flight Starting Location: " << right << startingPoint << endl;
         cout << setw(40) << left << "Flight Destination: " << right << destination << endl;
@@ -272,19 +284,22 @@ namespace Airport {
         rowsForEcon = numRows/2;
         rowsForFirst = floor((double)rowsForEcon/2);
         rowsForPlus = ceil((double)rowsForEcon/2);
-        cout << "does it get here " << endl;
-        cout << "numFirstClass: " << numFirstClass << endl;
-        cout << "rowsForFirst: " << rowsForFirst << endl;
-        seatRowFirst = numFirstClass/rowsForFirst;
-        seatRowPlus = numEconPlus/rowsForPlus;
-        seatRowEcon = numEcon/rowsForEcon;
-        aisleFirst = floor((double)seatRowFirst/2);
-        aislePlus = floor((double)seatRowPlus/2);
-        aisleEcon = floor((double)seatRowEcon/2);
+        seatRowFirst = ceil((double)numFirstClass/rowsForFirst);
+        seatRowPlus = ceil((double)numEconPlus/rowsForPlus);
+        seatRowEcon = ceil((double)numEcon/rowsForEcon);
+        aisleFirst = ceil((double)seatRowFirst/2);
+        aislePlus = ceil((double)seatRowPlus/2);
+        aisleEcon = ceil((double)seatRowEcon/2);
+
         //need to increment numSeats to add in aisle
-        numFirstClass++;
-        numEconPlus++;
-        numEcon++;
+        seatRowFirst++;
+        seatRowPlus++;
+        seatRowEcon++;
+
+        numFirstClass = rowsForFirst * seatRowFirst - rowsForFirst;
+        numEconPlus = rowsForPlus * seatRowPlus - rowsForPlus;
+        numEcon = rowsForEcon * seatRowEcon - rowsForEcon;
+
         for (int i = 0; i < rowsForFirst; i++) {
             vector<Seat*> tempList;
             for (int j = 0; j < seatRowFirst; j++) {
@@ -310,7 +325,7 @@ namespace Airport {
                 } else {
                     temp = new EconPlus(basePrice, this);
                 }
-                temp->setRow(i);
+                temp->setRow(i + rowsForFirst);
                 temp->setSeat((static_cast<char>(j + 'A')));
                 tempList.push_back(temp);
             }
@@ -326,7 +341,7 @@ namespace Airport {
                 } else {
                     temp = new EconSeat(basePrice, this);
                 }
-                temp->setRow(i);
+                temp->setRow(i + rowsForFirst + rowsForPlus);
                 temp->setSeat((static_cast<char>(j + 'A')));
                 tempList.push_back(temp);
             }
@@ -334,34 +349,26 @@ namespace Airport {
         }
     }
 
-    void Flight::writePlaneFile(ostream &flightFile) {
-        flightFile << "i am writing to the flightFile" << endl;
-        flightFile << "flight\n" << ID << " " << numRows << " " << numFirstClass << " " << numEconPlus << " " << numEcon << endl;
-        flightFile << " " << rowsForFirst << " " << rowsForPlus << " " << rowsForEcon << endl;
-        flightFile << " " << seatRowFirst << " " << seatRowPlus << " " << seatRowEcon << endl;
-        flightFile << " " << aisleFirst << " " << aislePlus << " " << aisleEcon << endl;
+    void Flight::writePlaneFile(ostream &flightFile, ostream &seatFile) {
+        flightFile << "flight\n" << ID << endl;
         flightFile << basePrice << endl;
         flightFile << startingPoint << endl;
         flightFile << destination << endl;
         flightFile << planeType << endl;
         flightFile << departureTime << " " << arrivalTime << endl;
-        flightFile << thePlane->getId() << endl;
-        flightFile << "seats" << endl;
+        if (thePlane != nullptr) {
+            flightFile << thePlane->getId() << endl;
+        }
+        seatFile << "flight " << ID << endl;
         vector<vector<Seat*>>::iterator vectorIter;
         for (vectorIter = SeatList.begin(); vectorIter != SeatList.end(); ++vectorIter){
             vector<Seat*>::iterator seatIter;
             for (seatIter = (*vectorIter).begin(); seatIter !=(*vectorIter).end(); seatIter++ ) {
-                (*seatIter)->writeToFile(flightFile);
+                (*seatIter)->writeToFile(seatFile);
             }
         }
-        flightFile << "endSeats\n";
-        flightFile << "passengers\n";
-        vector<Passenger*>::iterator passIter;
-        for (passIter = PassengerList.begin(); passIter != PassengerList.end(); ++passIter) {
-            flightFile << (*passIter)->getId() << "\n";
-        }
-        flightFile << "endPassenger\n";
-        flightFile << "endFlight\n";
+        flightFile << "endFlight " << ID << endl;
+        flightFile << "endFlight" << endl;
 
     }
 }

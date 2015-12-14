@@ -59,7 +59,7 @@ namespace Airport {
         void _initSeatList();
 
         void printFlight() const;
-        void writePlaneFile(ostream& flightFile);
+        void writePlaneFile(ostream& flightFile, ostream &seatFile);
 
     private:
         int ID;
