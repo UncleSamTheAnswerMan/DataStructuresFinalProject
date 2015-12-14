@@ -293,6 +293,9 @@ namespace Airport {
             addFlight();
         }
     }
+    void Menu::showAllPassengers() {
+        airport->printPassengers();
+    }
     void Menu::addFlightToCart() {
         Flight* flight = userFlight();
         string theSeat = userSeat(flight);
@@ -467,6 +470,7 @@ namespace Airport {
         cout << "8 Change a flight's plane" << endl;
         cout << "9 View all passengers on a flight" << endl;
         cout << "0 View all flights for a given plane" << endl;
+        cout << "P Show all passengers" << endl;
         cout << "L Log out" << endl;
         cout << "S Save and Quit" << endl;
         cin >> chosenOption;
@@ -498,6 +502,8 @@ namespace Airport {
                 printPassengersOnAFlight();
             } else if (option == '0') {
                 showAllPlaneFlights();
+            } else if (option == 'P' || option == 'p') {
+                showAllPassengers();
             } else if (option == 'L' || option == 'l') {
                 login();
             } else if (option=='S' || option == 's') {

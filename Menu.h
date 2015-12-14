@@ -43,6 +43,7 @@ namespace Airport {
         void deletePassenger();
         void addFlight();
         void showAllPlaneFlights();
+        void showAllPassengers();
         void deleteFlight();
         void showFlights();
         void changePlaneFlight();
