@@ -65,6 +65,9 @@ namespace Airport {
                     cout << "The seat letter you entered is not valid." << endl;
                     userSeat(flight);
                 }
+            } else {
+                cout << "That row number is too high." << endl;
+                userSeat(flight);
             }
         }
     }
@@ -113,7 +116,7 @@ namespace Airport {
         printf ("Enter day: "); fflush(stdout); scanf ("%d",&day);
         printf ("Enter hour: "); fflush(stdout); scanf ("%d",&hour);
         printf ("Enter minute: "); fflush(stdout); scanf ("%d",&minute);
-        printf ("Enter second: "); fflush(stdout); scanf ("%d",&second);
+        second = 0;
 
 
         /* get current timeinfo and modify it to the user's choice */
@@ -238,6 +241,7 @@ namespace Airport {
             cout << "Please choose a flight to book: " << endl;
             Flight *chosenFlight = userFlight();
             Passenger *chosenPassenger = userPassenger();
+
             string seat = userSeat(chosenFlight);
             chosenFlight->bookFlight(chosenPassenger, seat);
         }
