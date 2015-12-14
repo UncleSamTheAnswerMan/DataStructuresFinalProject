@@ -230,6 +230,8 @@ namespace Airport {
         for (int k=0; k<(seatRowEcon - seatRowFirst); k++) {
             firstSpacer++;
         }
+        firstSpacer = firstSpacer * 2 + 1;
+        plusSpacer = plusSpacer * 2 + 1;
         for (vectorIter = SeatList.begin(); vectorIter != SeatList.end(); ++vectorIter) {
             int j = 0;
             vector<Seat*>::iterator seatIter;
@@ -246,7 +248,7 @@ namespace Airport {
                 (*seatIter)->printSeat();
                 if (i < rowsForFirst && j==aisleFirst) {
                     cout << setw(firstSpacer);
-                } else if (i < (rowsForFirst + rowsForPlus) && j==aislePlus){
+                } else if ( i >= rowsForFirst && i < (rowsForFirst + rowsForPlus) && j==aislePlus){
                     cout << setw(plusSpacer);
                 }
                 j++;
