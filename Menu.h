@@ -53,6 +53,7 @@ namespace Airport {
     private:
         Port* airport;
         Passenger* currentPassenger;
+        double curPassTotPrice;
 
     };
 }

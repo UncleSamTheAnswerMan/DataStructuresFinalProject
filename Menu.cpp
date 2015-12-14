@@ -297,15 +297,28 @@ namespace Airport {
         Flight* flight = userFlight();
         string theSeat = userSeat(flight);
         currentPassenger->addFlightToCart(flight);
+        currentPassenger->addSeatToList(theSeat);
         double thisPrice = flight->getPriceOfSeat(theSeat);
-        cout << "the seat costs " << thisPrice << endl;
+        cout << "the seat costs $" << thisPrice << endl;
+        curPassTotPrice += thisPrice;
     }
     void Menu::deleteFlightFromCart() {
         Flight* flight = userFlight();
+        string seat = userSeat(flight);
         currentPassenger->deleteFlightFromCart(flight);
+        currentPassenger->deleteSeatFromList(seat);
     }
     void Menu::viewCart() {
         currentPassenger->showCart();
+        cout << "Your running total price is: $" << curPassTotPrice << endl;
+        char checkOutOrNot;
+        cout << "Would you like to check out? " << endl;
+        cin >> checkOutOrNot;
+        if (checkOutOrNot == 'y' || checkOutOrNot == 'Y') {
+            cout << "Your total cost is: $" << curPassTotPrice << endl;
+            currentPassenger->bookFlightsInCart();
+            curPassTotPrice = 0;
+        }
     }
     void Menu::deleteFlight() {
         Flight* f = userFlight();
@@ -378,6 +391,7 @@ namespace Airport {
             textGUI();
         } else if (choice == '2') {
             currentPassenger = userPassenger();
+            curPassTotPrice = 0;
             if (currentPassenger == nullptr) {
                 char otherChoice;
                 cout << "Would you like to log in as admin to create a passenger?" << endl;
@@ -400,12 +414,11 @@ namespace Airport {
     }
     char Menu::getPassengerOption() {
         char chosenOption;
-        cout << "1 Book a flight" << endl;
-        cout << "2 Add a flight to cart" << endl;
-        cout << "3 Delete flight from cart" << endl;
-        cout << "4 Cancel a flight" << endl;
-        cout << "5 Show Itinerary" << endl;
-        cout << "6 Show cart" << endl;
+        cout << "1 Add a flight to cart" << endl;
+        cout << "2 Delete flight from cart" << endl;
+        cout << "3 Cancel a flight" << endl;
+        cout << "4 Show Itinerary" << endl;
+        cout << "5 Show cart/checkout" << endl;
         cout << "L Log out" << endl;
         cout << "S Save and Quit" << endl;
         cin >> chosenOption;
@@ -418,16 +431,14 @@ namespace Airport {
             if (option == 'q' || option == 'Q') {
                 break;
             } else if (option == '1') {
-                bookFlightMenu();
-            } else if (option =='2') {
                 addFlightToCart();
-            } else if (option == '3') {
+            } else if (option =='2') {
                 deleteFlightFromCart();
-            } else if (option == '4') {
+            } else if (option == '3') {
                 cancelPassengerBooking();
-            } else if (option == '5') {
+            } else if (option == '4') {
                 showPassengerItinerary();
-            } else if (option == '6') {
+            } else if (option == '5') {
                 viewCart();
             } else if (option == 'L' || option == 'l') {
                 login();

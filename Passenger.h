@@ -21,6 +21,7 @@ namespace Airport {
         int ID;
         vector<Flight*> Flights;
         vector<Flight*> Cart;
+        vector<string> Seats;
     public:
         Passenger();
         Passenger(std::string fName, std::string lName, int ID);
@@ -38,6 +39,9 @@ namespace Airport {
         void addFlightToCart(Flight* f);
         void showCart() const;
         void deleteFlightFromCart(Flight* f);
+        void bookFlightsInCart();
+        void addSeatToList(string seat);
+        void deleteSeatFromList(string seat);
 
     };
 

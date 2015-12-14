@@ -66,6 +66,17 @@ namespace Airport {
         }
 
     }
+    void Passenger::bookFlightsInCart() {
+        if (Cart.size() < 1) {
+            cout << "There is nothing in your cart to check out." << endl;
+        } else {
+            for (int i = 0; i<Cart.size();i++) {
+                Cart[i]->bookFlight(this,Seats[i]);
+            }
+        }
+
+
+    }
     void Passenger::printPassengerFlights() const {
         for (int i=0; i<Flights.size();i++) {
             Flights[i]->printFlight();
@@ -86,6 +97,24 @@ namespace Airport {
     }
     void Passenger::addFlightToCart(Flight *f) {
         Cart.push_back(f);
+
+    }
+    void Passenger::addSeatToList(string seat) {
+        Seats.push_back(seat);
+    }
+    void Passenger::deleteSeatFromList(string seat) {
+        if (Seats.size()<1) {
+            cout << "There are no seats to delete." << endl;
+        } else {
+            for (int i=0; i<Seats.size();i++) {
+                if(!Seats[i].compare(seat)) {
+                    Seats.erase(Seats.begin()+i);
+                }
+                else {
+                    cout << "There's not a seat like that in the list" << endl;
+                }
+            }
+        }
     }
     void Passenger::showCart() const {
         if (Cart.size() < 1) {
@@ -94,6 +123,7 @@ namespace Airport {
             cout << "The following flights are in the cart: " << endl;
             for (int i=0;i<Cart.size();i++) {
                 Cart[i]->printFlight();
+                cout << Seats[i] << endl;
             }
         }
     }
