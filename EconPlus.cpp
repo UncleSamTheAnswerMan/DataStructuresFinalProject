@@ -32,7 +32,7 @@ namespace Airport {
 
     void EconPlus::writeToFile(ostream &output) {
         if (getOccupant() != nullptr) {
-            output << 2 << " " << getRow() << getSeat() << " " << getOccupant()->getId() << endl;
+            output << 2 << " " << (getRow()+1) << getSeat() << " " << getOccupant()->getId() << endl;
         }
     }
 }

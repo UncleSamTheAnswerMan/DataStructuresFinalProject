@@ -386,7 +386,7 @@ namespace Airport {
                 (*seatIter)->writeToFile(seatFile);
             }
         }
-        flightFile << "endFlight " << ID << endl;
+        seatFile << "endFlight" << endl;
         flightFile << "endFlight" << endl;
 
     }

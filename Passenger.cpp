@@ -87,12 +87,12 @@ namespace Airport {
         output << firstName << "\n";
         output << lastName << "\n";
         output << ID << "\n";
-        output << "flights\n";
-        vector<Flight*>::iterator iter;
-        for (iter = Flights.begin(); iter != Flights.end(); iter++) {
-            output << (*iter)->getID() << "\n";
-        }
-        output << "endFlights\n";
+//        output << "flights\n";
+//        vector<Flight*>::iterator iter;
+//        for (iter = Flights.begin(); iter != Flights.end(); iter++) {
+//            output << (*iter)->getID() << "\n";
+//        }
+//        output << "endFlights\n";
         output << "endPassenger\n";
     }
     void Passenger::addFlightToCart(Flight *f) {

@@ -34,8 +34,9 @@ namespace Airport {
         Flight* getFlightById(int id);
         Passenger* getPassengerById(int i);
         Passenger* getPassengerByIndex(int i);
+        Plane* getPlaneByID(int ID);
         void writeStuffToFile();
-
+        void readFromFile();
 
     private:
         vector<Flight*> flightSchedule;

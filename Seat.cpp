@@ -76,9 +76,7 @@ namespace Airport {
 
     void Seat::writeToFile(ostream& output) {
         if (theOccupant != nullptr) {
-            output << 0 << " " << row << seat << " " << theOccupant->getId() << endl;
-        } else {
-            output << 0 << " " << row << seat << " " << -1 << endl;
+            output << 0 << " " << (row+1) << seat << " " << theOccupant->getId() << endl;
         }
     }
 

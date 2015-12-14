@@ -73,14 +73,14 @@ namespace Airport {
         nextFlight->printFlight();
     }
 
-    void Itinerary::writeItinerary(ostream &planeOutput) {
-        planeOutput << "itinerary" << endl;
-        vector<Flight*>::iterator iter;
-        if (!flightList.empty()) {
-            for (iter = flightList.begin(); iter != flightList.end(); ++iter) {
-                planeOutput << (*iter)->getID() << "\n";
-            }
-        }
-        planeOutput << "endItinerary" << endl;
-    }
+//    void Itinerary::writeItinerary(ostream &planeOutput) {
+//        planeOutput << "itinerary" << endl;
+//        vector<Flight*>::iterator iter;
+//        if (!flightList.empty()) {
+//            for (iter = flightList.begin(); iter != flightList.end(); ++iter) {
+//                planeOutput << (*iter)->getID() << "\n";
+//            }
+//        }
+//        planeOutput << "endItinerary" << endl;
+//    }
 }
