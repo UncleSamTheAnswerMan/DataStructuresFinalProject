@@ -14,7 +14,7 @@ namespace Airport {
     EconSeat::EconSeat(double thePrice, Flight* theFlight) : Seat(thePrice, theFlight) {//full constructor -> also invokes constructor of parent
 
     }
-    double EconSeat::calcPrice(int days, int miles) const{//specific calcPrice for EconSeats
+    double EconSeat::calcPrice(int days) {//specific calcPrice for EconSeats
         if (days >= 30) {
             return (getBasePrice());
         } else if (days >= 8) {

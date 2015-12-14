@@ -39,7 +39,7 @@ namespace Airport {
         int getSeatsRowFirst() const;
         int getSeatsRowPlus() const;
         int getSeatsRowsEcon() const;
-
+        double getPriceOfSeat(string seat);
 
         void setID(const int newID);
         void setStartingPoint(const string newStart);

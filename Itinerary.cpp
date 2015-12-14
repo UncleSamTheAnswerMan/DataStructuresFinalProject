@@ -77,7 +77,6 @@ namespace Airport {
         planeOutput << "itinerary" << endl;
         vector<Flight*>::iterator iter;
         if (!flightList.empty()) {
-            planeOutput << flightList[0]->getID() << endl;
             for (iter = flightList.begin(); iter != flightList.end(); ++iter) {
                 planeOutput << (*iter)->getID() << "\n";
             }

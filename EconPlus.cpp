@@ -16,23 +16,15 @@ namespace Airport {
     EconPlus::EconPlus(double thePrice, Flight* theFlight) : Seat::Seat(thePrice, theFlight) {//full constructor
 
     }
-    double EconPlus::calcPrice(int days, int miles) const{//calcPrice implemented for EconPlus
+    double EconPlus::calcPrice(int days) {//calcPrice implemented for EconPlus
 
-        int distPrice = 0;
-        if (miles < 800) {
-            distPrice = 75;
-        } else {
-            distPrice = 125;
-        }
-        if (days < 30) {
-            distPrice += 10;
-        }
+        
         if (days >= 30) {
-            return (getBasePrice() + distPrice);
+            return (getBasePrice());
         } else if (days >= 8) {
-            return ((getBasePrice() * 1.1) + distPrice);
+            return ((getBasePrice() * 1.1));
         } else if (days >= 0) {
-            return ((getBasePrice() * 1.2) + distPrice);
+            return ((getBasePrice() * 1.2));
         } else {
             return -1;
         }

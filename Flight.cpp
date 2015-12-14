@@ -103,7 +103,27 @@ namespace Airport {
     Plane* Flight::getPlane() const {
         return thePlane;
     }
-
+    double Flight::getPriceOfSeat(string chosenSeat) {
+        stringstream seatStream;
+        seatStream.str(chosenSeat);
+        int rowNum, seatNum;
+        char seatChar;
+        seatStream >> rowNum;
+        seatStream >> seatChar;
+        seatChar = toupper(seatChar);
+        seatNum = static_cast<int>(seatChar - 'A');
+        cout << "rowNum: " << rowNum << "\nSeatChar: " << seatChar << "\nSeatNum: " << seatNum << endl;
+        rowNum--;
+        Seat *theSeat;
+        //if (rowNum < numRows && seatNum < SeatList[rowNum].size()) {
+        theSeat = SeatList[(rowNum)][seatNum];
+        //}
+        double thePrice = theSeat->calcPrice(30);
+        cout << "the price is " << thePrice << endl;
+        cout << "row: " << theSeat->getRow();
+        cout << "seatletter: " << theSeat->getSeat();
+        return thePrice;
+    }
     Passenger* Flight::getPassengerForSeat(string seat) const{
         Passenger*  thePass;
         stringstream seatStream;

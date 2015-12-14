@@ -34,7 +34,7 @@ namespace Airport {
 
         virtual void writeToFile(ostream& output);
         virtual void printSeat();
-        virtual double calcPrice(double days, double miles) const;
+        virtual double calcPrice(double days);
 
     private:
         Flight* theFlight;

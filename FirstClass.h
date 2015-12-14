@@ -14,10 +14,11 @@ namespace Airport {
     class Flight;
     class FirstClass : public Seat{//FirstClassSeat inherits from SeatBaseType
     public:
-        double calcPrice(int days, int miles) const;//Virtual for subtype polymorph
+        double calcPrice(int days);//Virtual for subtype polymorph
         FirstClass();
         FirstClass(double thePrice, Flight* theFlight);
         void writeToFile(ostream& output);
+
     };
 }
 #endif //DATASTRUCTURESFINALPROJECT_FIRSTCLASS_H

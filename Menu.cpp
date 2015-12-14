@@ -295,7 +295,10 @@ namespace Airport {
     }
     void Menu::addFlightToCart() {
         Flight* flight = userFlight();
+        string theSeat = userSeat(flight);
         currentPassenger->addFlightToCart(flight);
+        double thisPrice = flight->getPriceOfSeat(theSeat);
+        cout << "the seat costs " << thisPrice << endl;
     }
     void Menu::deleteFlightFromCart() {
         Flight* flight = userFlight();
@@ -315,6 +318,10 @@ namespace Airport {
         cout << "Please choose the flight to view passengers." <<endl;
         Flight* flightToShow = userFlight();
         flightToShow->showPassengers();
+    }
+    void Menu::showAllPlaneFlights() {
+        Plane* toShow = userPlane();
+        toShow->showItinerary();
     }
     void Menu::changePlaneFlight() {
 
@@ -426,6 +433,7 @@ namespace Airport {
                 login();
             } else if (option == 'S' || option == 's') {
                 outputToFile();
+                keepGoing = false;
                 break;
             } else {
                 cout << "You did not pick a valid option." << endl;
@@ -447,6 +455,7 @@ namespace Airport {
         cout << "7 Show flights" << endl;
         cout << "8 Change a flight's plane" << endl;
         cout << "9 View all passengers on a flight" << endl;
+        cout << "0 View all flights for a given plane" << endl;
         cout << "L Log out" << endl;
         cout << "S Save and Quit" << endl;
         cin >> chosenOption;
@@ -476,10 +485,13 @@ namespace Airport {
                 changePlaneFlight();
             } else if (option == '9') {
                 printPassengersOnAFlight();
+            } else if (option == '0') {
+                showAllPlaneFlights();
             } else if (option == 'L' || option == 'l') {
                 login();
             } else if (option=='S' || option == 's') {
                 outputToFile();
+                keepGoing = false;
                 break;
             } else {
                 cout << "You did not pick a valid option." << endl;

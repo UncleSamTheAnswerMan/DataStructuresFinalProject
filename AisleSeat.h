@@ -14,7 +14,7 @@ namespace Airport {
     class AisleSeat : public Seat {
     public:
         AisleSeat(Flight *f);
-        double calcPrice(int days, int miles);
+        virtual double calcPrice(int days);
         Passenger* getOccupant() const;
         int getRow() const;
         char getSeat() const;

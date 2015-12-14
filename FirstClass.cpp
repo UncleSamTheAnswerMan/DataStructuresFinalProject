@@ -16,7 +16,7 @@ namespace Airport {
 
     }
 
-    double FirstClass::calcPrice(int days, int miles) const {//calcPrice implemented for FirstClass pricing
+    double FirstClass::calcPrice(int days) {//calcPrice implemented for FirstClass pricing
         if (days >= 30) {
             return (getBasePrice() * 3);
         } else if (days >= 8) {

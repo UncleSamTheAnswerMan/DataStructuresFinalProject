@@ -124,11 +124,14 @@ namespace Airport {
 
     void Port::writeStuffToFile() {
         ofstream flightFile;
+        ofstream seatFile;
         flightFile.open("flightStuff.txt");
+        seatFile.open("seatStuff.txt");
         vector<Flight*>::iterator flightIter;
         for (flightIter = flightSchedule.begin(); flightIter != flightSchedule.end(); ++flightIter){
-            (*flightIter)->writePlaneFile(flightFile);
+            (*flightIter)->writePlaneFile(flightFile,seatFile);
         }
+        seatFile.close();
         flightFile.close();
 
         ofstream passFile;
