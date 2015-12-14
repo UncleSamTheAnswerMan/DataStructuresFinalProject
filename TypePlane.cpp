@@ -20,7 +20,6 @@ namespace Airport {
         cout << "6 L1011" << endl;
     }
     int TypePlane::getNumOfSeats(std::string planeType) {
-        cout << planeType << "*********************" << endl;
         if (!planeType.compare("A380")) {
             return 900;
         } else if (!planeType.compare("A330")) {

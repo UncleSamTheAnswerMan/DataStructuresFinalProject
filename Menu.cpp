@@ -7,6 +7,7 @@
 #include "time.h"
 #include "TypePlane.h"
 #include "Plane.h"
+#include "stdlib.h"
 #include <sstream>
 using namespace std;
 namespace Airport {
@@ -72,8 +73,7 @@ namespace Airport {
         }
     }
     void Menu::cancelPassengerBooking() const {
-        Passenger* canceler = userPassenger();
-        canceler->cancelFlight();
+        currentPassenger->cancelFlight();
     }
     string Menu::userTypePlane() const {
         int typeOption;
@@ -109,29 +109,14 @@ namespace Airport {
         const char * weekday[] = { "Sunday", "Monday",
                                    "Tuesday", "Wednesday",
                                    "Thursday", "Friday", "Saturday"};
-
-        /* prompt user for date */
         printf ("Enter year: "); fflush(stdout); scanf ("%d",&year);
         printf ("Enter month: "); fflush(stdout); scanf ("%d",&month);
         printf ("Enter day: "); fflush(stdout); scanf ("%d",&day);
         printf ("Enter hour: "); fflush(stdout); scanf ("%d",&hour);
         printf ("Enter minute: "); fflush(stdout); scanf ("%d",&minute);
         second = 0;
-
-
-        /* get current timeinfo and modify it to the user's choice */
-
         struct tm timeinfo = {second, minute, hour, day, (month-1), (year-1900)};
-//        timeinfo.tm_year = year - 1900;
-//        timeinfo.tm_mon = month - 1;
-//        timeinfo.tm_mday = day;
-//        timeinfo.tm_hour = hour;
-//        timeinfo.tm_min = minute;
-//        timeinfo.tm_sec = second;
-
-        /* call mktime: timeinfo->tm_wday will be set */
         time_t thetime = mktime ( &timeinfo );
-
         return thetime;
     }
     Plane* Menu::userPlane() const {
@@ -139,14 +124,16 @@ namespace Airport {
         int choice;
         airport->getFleet()->showFleet();
         cin >> choice;
-        cout << "you chose " << choice << endl;
         Plane* planeToChoose = airport->getFleet()->getPlaneById(choice);
         planeToChoose->printPlane();
-        cout << "plane printed but not gotten" << endl;
         return planeToChoose;
     }
     Passenger* Menu::userPassenger() const {
         int choicePassenger;
+        if (airport->getSizeOfPassList() < 1) {
+            cout << "There are currently no passengers in the airport database." << endl;
+            return nullptr;
+        }
         cout << "Please choose the ID next to the passenger you would like: " << endl;
         airport->printPassengers();
         cin >> choicePassenger;
@@ -240,10 +227,8 @@ namespace Airport {
         } else {
             cout << "Please choose a flight to book: " << endl;
             Flight *chosenFlight = userFlight();
-            Passenger *chosenPassenger = userPassenger();
-
             string seat = userSeat(chosenFlight);
-            chosenFlight->bookFlight(chosenPassenger, seat);
+            chosenFlight->bookFlight(currentPassenger, seat);
         }
     }
     void Menu::createPassenger() {
@@ -268,8 +253,7 @@ namespace Airport {
         }
     }
     void Menu::showPassengerItinerary() const {
-        Passenger* showPass = userPassenger();
-        showPass->printPassengerFlights();
+        currentPassenger->printPassengerFlights();
     }
     void Menu::addFlight() {
         int firstChoice;
@@ -308,8 +292,17 @@ namespace Airport {
             cout << "You did not pick a valid option" << endl;
             addFlight();
         }
-
-
+    }
+    void Menu::addFlightToCart() {
+        Flight* flight = userFlight();
+        currentPassenger->addFlightToCart(flight);
+    }
+    void Menu::deleteFlightFromCart() {
+        Flight* flight = userFlight();
+        currentPassenger->deleteFlightFromCart(flight);
+    }
+    void Menu::viewCart() {
+        currentPassenger->showCart();
     }
     void Menu::deleteFlight() {
         Flight* f = userFlight();
@@ -366,68 +359,133 @@ namespace Airport {
     void Menu::outputToFile() {
         airport->writeStuffToFile();
     }
-    int Menu::getOption() {
-        int chosenOption;
+
+    void Menu::login() {
+        char choice;
+        cout << "Pick a login setting: " << endl;
+        cout << "1 Log in as admin" << endl;
+        cout << "2 Log in with passenger ID" << endl;
+        cout << "Q to quit" << endl;
+        cin >> choice;
+        if (choice == '1') {
+            textGUI();
+        } else if (choice == '2') {
+            currentPassenger = userPassenger();
+            if (currentPassenger == nullptr) {
+                char otherChoice;
+                cout << "Would you like to log in as admin to create a passenger?" << endl;
+                cin >> otherChoice;
+                if (otherChoice=='Y' || otherChoice=='y') {
+                    textGUI();
+                }
+                else {
+                    cout << "Have a fantastic day!" << endl;
+                    exit(0);
+                }
+            } else {
+                passengerTextGui();
+            }
+
+        } else if (choice=='Q' || choice=='q') {
+            cout << "Goodbye and have a wonderful day!" << endl;
+            exit(0);
+        }
+    }
+    char Menu::getPassengerOption() {
+        char chosenOption;
+        cout << "1 Book a flight" << endl;
+        cout << "2 Add a flight to cart" << endl;
+        cout << "3 Delete flight from cart" << endl;
+        cout << "4 Cancel a flight" << endl;
+        cout << "5 Show Itinerary" << endl;
+        cout << "6 Show cart" << endl;
+        cout << "L Log out" << endl;
+        cout << "S Save and Quit" << endl;
+        cin >> chosenOption;
+        return chosenOption;
+    }
+    void Menu::passengerTextGui() {
+        bool keepGoing = true;
+        while (keepGoing) {
+            char option = getPassengerOption();
+            if (option == 'q' || option == 'Q') {
+                break;
+            } else if (option == '1') {
+                bookFlightMenu();
+            } else if (option =='2') {
+                addFlightToCart();
+            } else if (option == '3') {
+                deleteFlightFromCart();
+            } else if (option == '4') {
+                cancelPassengerBooking();
+            } else if (option == '5') {
+                showPassengerItinerary();
+            } else if (option == '6') {
+                viewCart();
+            } else if (option == 'L' || option == 'l') {
+                login();
+            } else if (option == 'S' || option == 's') {
+                outputToFile();
+                break;
+            } else {
+                cout << "You did not pick a valid option." << endl;
+                //passengerTextGui();
+            }
+            keepGoing = true;
+        }
+    }
+    char Menu::getOption() {
+        char chosenOption;
         cout << "Select the number next to the option you are interested in: " << endl;
         cout << "Q Quit" << endl;
         cout << "1 Add a plane to the fleet" << endl;
         cout << "2 Delete a plane from the fleet" << endl;
-        cout << "3 Book a flight" << endl;
-        cout << "4 Add a new passenger" << endl;
-        cout << "5 Delete an existing passenger" << endl;
-        cout << "6 Add a flight" << endl;
-        cout << "7 Delete a flight" << endl;
-        cout << "8 Show flights" << endl;
-        cout << "9 Change a flight's plane" << endl;
-        cout << "10 View all passengers on a flight" << endl;
-        cout << "11 Cancel a passenger's flight" << endl;
-        cout << "12 Show a passenger's itinerary" << endl;
-        cout << "13 Save and Quit" << endl;
+        cout << "3 Add a new passenger" << endl;
+        cout << "4 Delete an existing passenger" << endl;
+        cout << "5 Add a flight" << endl;
+        cout << "6 Delete a flight" << endl;
+        cout << "7 Show flights" << endl;
+        cout << "8 Change a flight's plane" << endl;
+        cout << "9 View all passengers on a flight" << endl;
+        cout << "L Log out" << endl;
+        cout << "S Save and Quit" << endl;
         cin >> chosenOption;
         return chosenOption;
     }
     void Menu::textGUI() {
         bool keepGoing = true;
         while (keepGoing) {
-            int option = getOption();
-            if (static_cast<char>(option) == 'q' || static_cast<char>(option) == 'Q')
-            {
-                return;
-            } else if (option == 1) {
+            char option = getOption();
+            if (option ==('q') || option == 'Q') {
+                break;
+            } else if (option =='1' ) {
                 addPlaneMenu();
-            } else if (option == 2) {
+            } else if (option == '2') {
                 deletePlaneMenu();
-            } else if (option == 3) {
-                bookFlightMenu();
-            } else if (option == 4) {
+            } else if (option == '3') {
                 createPassenger();
-            } else if (option == 5) {
+            } else if (option == '4') {
                 deletePassenger();
-            } else if (option == 6) {
+            } else if (option == '5') {
                 addFlight();
-            } else if (option == 7) {
+            } else if (option == '6') {
                 deleteFlight();
-            } else if (option == 8) {
+            } else if (option == '7') {
                 showFlights();
-            } else if (option == 9) {
+            } else if (option == '8') {
                 changePlaneFlight();
-            } else if (option == 10) {
+            } else if (option == '9') {
                 printPassengersOnAFlight();
-            } else if (option==11) {
-                cancelPassengerBooking();
-            } else if (option==12) {
-                showPassengerItinerary();
-            } else if (option == 13) {
+            } else if (option == 'L' || option == 'l') {
+                login();
+            } else if (option=='S' || option == 's') {
                 outputToFile();
                 break;
             } else {
                 cout << "You did not pick a valid option." << endl;
-                textGUI();
+                //textGUI();
             }
-            cout << "Would you like to select another option?" << endl;
-            string answer;
-            cin >> answer;
-            keepGoing = (answer[0] == 'y' || answer[0] == 'Y');
+            keepGoing = true;
         }
     }
 }

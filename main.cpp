@@ -10,6 +10,6 @@ using namespace std;
 int main() {
     Port* a = new Port();
     Menu* m = new Menu(a);
-    m->textGUI();
+    m->login();
     return 0;
 }

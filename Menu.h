@@ -28,6 +28,11 @@ namespace Airport {
         string userEndLocation()const ;
         Flight* userFlight()const ;
         string userSeat(Flight* f) const;
+        void addFlightToCart();
+        void deleteFlightFromCart();
+        void viewCart();
+        void login();
+        void passengerTextGui();
         void printPassengersOnAFlight() const;
         void cancelPassengerBooking() const;
         void showPassengerItinerary() const;
@@ -42,9 +47,11 @@ namespace Airport {
         void changePlaneFlight();
         void outputToFile();
         void textGUI();
-        int getOption();
+        char getOption();
+        char getPassengerOption();
     private:
         Port* airport;
+        Passenger* currentPassenger;
 
     };
 }

@@ -20,6 +20,7 @@ namespace Airport {
         std::string lastName;
         int ID;
         vector<Flight*> Flights;
+        vector<Flight*> Cart;
     public:
         Passenger();
         Passenger(std::string fName, std::string lName, int ID);
@@ -34,6 +35,9 @@ namespace Airport {
         void writePassengerFile(ostream& output);
         void printPassengerFlights() const;
         void cancelFlight();
+        void addFlightToCart(Flight* f);
+        void showCart() const;
+        void deleteFlightFromCart(Flight* f);
 
     };
 

@@ -28,7 +28,7 @@ namespace Airport {
         ID = newId;
     }
     void Passenger::printPassenger() const {
-        cout << firstName << " " << lastName << " " << ID << endl;
+        cout << firstName << " " << lastName << endl;
     }
     void Passenger::updateFlight(Flight* f) {
         bool found  = false;
@@ -83,6 +83,37 @@ namespace Airport {
         }
         output << "endFlights\n";
         output << "endPassenger\n";
+    }
+    void Passenger::addFlightToCart(Flight *f) {
+        Cart.push_back(f);
+    }
+    void Passenger::showCart() const {
+        if (Cart.size() < 1) {
+            cout << "There are currently no flights in the cart." << endl;
+        } else {
+            cout << "The following flights are in the cart: " << endl;
+            for (int i=0;i<Cart.size();i++) {
+                Cart[i]->printFlight();
+            }
+        }
+    }
+    void Passenger::deleteFlightFromCart(Flight *f) {
+        if (Cart.size() < 1) {
+            cout << "This passenger doesn't have any flights in the cart." << endl;
+        } else {
+            int delId;
+            cout << "Select the flight you would like to cancel by its ID: " << endl;
+            showCart();
+            cin >> delId;
+            for (int i = 0; i < Cart.size(); i++) {
+                if (delId == Cart[i]->getID()) {
+                    Cart.erase(Cart.begin() + i);
+                    cout << "Flight successfully removed from cart." << endl;
+                } else {
+                    cout << "That flight ID is not valid." << endl;
+                }
+            }
+        }
     }
 
 }
