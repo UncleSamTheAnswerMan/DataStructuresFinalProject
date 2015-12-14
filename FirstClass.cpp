@@ -29,6 +29,10 @@ namespace Airport {
     }
 
     void FirstClass::writeToFile(ostream &output) {
-        output << 1 << " " << getRow() << getSeat() << " " << getOccupant()->getId() << endl;
+        if (getOccupant() != nullptr) {
+            output << 1 << " " << getRow() << getSeat() << " " << getOccupant()->getId() << endl;
+        } else {
+            output << 1 << " " << getRow() << getSeat() << " " << -1 << endl;
+        }
     }
 }

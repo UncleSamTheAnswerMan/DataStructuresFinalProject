@@ -18,6 +18,7 @@ namespace Airport {
         virtual Passenger* getOccupant() const;
         virtual int getRow() const;
         virtual char getSeat() const;
+        void printSeat();
         void writeToFile(ostream& output);
 
     };

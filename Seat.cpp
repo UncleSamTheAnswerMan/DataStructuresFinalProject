@@ -75,10 +75,22 @@ namespace Airport {
     }
 
     void Seat::writeToFile(ostream& output) {
-        output << 0 << " " << row << seat << " " << theOccupant->getId() << endl;
+        if (theOccupant != nullptr) {
+            output << 0 << " " << row << seat << " " << theOccupant->getId() << endl;
+        } else {
+            output << 0 << " " << row << seat << " " << -1 << endl;
+        }
     }
 
     double Seat::calcPrice(double days, double miles) const {
         return thePrice;
+    }
+
+    void Seat::printSeat() {
+        if (theOccupant == nullptr) {
+            cout << seat << " ";
+        } else {
+            cout << "#" << " ";
+        }
     }
 }

@@ -33,8 +33,7 @@ namespace Airport {
         int getRow() const;
 
         virtual void writeToFile(ostream& output);
-
-
+        virtual void printSeat();
         virtual double calcPrice(double days, double miles) const;
 
     private:
