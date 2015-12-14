@@ -82,7 +82,7 @@ namespace Airport {
         }
     }
 
-    double Seat::calcPrice(double days) {
+    double Seat::calcPrice(int days) {
         cout << "fuck" << endl;
         return thePrice;
     }
