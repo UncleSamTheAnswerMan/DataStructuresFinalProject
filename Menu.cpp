@@ -39,15 +39,18 @@ namespace Airport {
             cout << "You did not enter a seat. Please try again." << endl;
             userSeat(flight);
         } else {
+            int rowsFirst = flight->getRowsFirst();
+            int rowsPlus = flight->getRowsPlus();
+            int rowsEcon = flight->getRowsEcon();
             rowNumber--;
-            if (rowNumber >= 0 && rowNumber < flight->getRowsFirst()) {
+            if (rowNumber >= 0 && rowNumber < rowsFirst) {
                 if (seatLetter >= 'A' && seatNum < flight->getSeatsRowFirst()) {
                     return seatStream.str();
                 } else {
                     cout << "The seat letter you entered is not valid." << endl;
                     userSeat(flight);
                 }
-            } else if (rowNumber >= flight->getSeatsRowFirst() && rowNumber < flight->getRowsPlus()) {
+            } else if (rowNumber >= rowsFirst && rowNumber < (rowsPlus + rowsFirst)) {
                 if (seatLetter >= 'A' && seatNum < flight->getSeatsRowPlus()) {
                     return seatStream.str();
                 } else {
@@ -55,14 +58,14 @@ namespace Airport {
                     userSeat(flight);
 
                 }
-            } else if (rowNumber >= flight->getRowsPlus() && rowNumber < flight->getRowsEcon()) {
-            if (seatLetter >= 'A' && seatNum < flight->getSeatsRowsEcon()) {
-                return seatStream.str();
-            } else {
-                cout << "The seat letter you entered is not valid." << endl;
-                userSeat(flight);
+            } else if (rowNumber >= (rowsPlus+rowsFirst) && rowNumber < (rowsEcon+rowsPlus+rowsFirst)) {
+                if (seatLetter >= 'A' && seatNum < flight->getSeatsRowsEcon()) {
+                    return seatStream.str();
+                } else {
+                    cout << "The seat letter you entered is not valid." << endl;
+                    userSeat(flight);
+                }
             }
-        }
         }
     }
     void Menu::cancelPassengerBooking() const {
@@ -260,6 +263,10 @@ namespace Airport {
             cout << "You have successfully deleted the passenger." << endl;
         }
     }
+    void Menu::showPassengerItinerary() const {
+        Passenger* showPass = userPassenger();
+        showPass->printPassengerFlights();
+    }
     void Menu::addFlight() {
         int firstChoice;
         cout << "Select the number corresponding to the option you are interested in : " << endl;
@@ -370,7 +377,8 @@ namespace Airport {
         cout << "9 Change a flight's plane" << endl;
         cout << "10 View all passengers on a flight" << endl;
         cout << "11 Cancel a passenger's flight" << endl;
-        cout << "12 Save and Quit" << endl;
+        cout << "12 Show a passenger's itinerary" << endl;
+        cout << "13 Save and Quit" << endl;
         cin >> chosenOption;
         return chosenOption;
     }
@@ -404,6 +412,8 @@ namespace Airport {
             } else if (option==11) {
                 cancelPassengerBooking();
             } else if (option==12) {
+                showPassengerItinerary();
+            } else if (option == 13) {
                 outputToFile();
                 break;
             } else {
